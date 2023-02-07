@@ -3,6 +3,9 @@ import ReactDOM from "react-dom/client"
 import App from "./App"
 import "./index.css"
 
+import { StageLevelProvider, useStageLevelContext } from './context/StageLevelContext'
+import { LaptopProvider } from './context/LaptopContext'
+
 import { Canvas } from "@react-three/fiber"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -14,6 +17,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       position: [-3, 1.5, 2.3],
     }}
   >
-    <App />
+    <StageLevelProvider>
+      <LaptopProvider>
+        <App />
+      </LaptopProvider>
+    </StageLevelProvider>
   </Canvas>
 )
