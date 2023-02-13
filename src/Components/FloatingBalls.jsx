@@ -4,23 +4,23 @@ import { animated, useSpring } from "@react-spring/three"
 import { useLaptopContext } from "../context/LaptopContext"
 import { useStageLevelContext } from "../context/StageLevelContext"
 
-import { useControls } from "leva"
+// import { useControls } from "leva"
 
 export default function FloatingBalls(props) {
-  const levaControls = useControls({
-    aa: -3.58, // firebase -0.05,
-    bb: -4.4, // firebase -4.91,
-    cc: -0.35, // firebase -3.96,
-    x: 2, // firebase 1.25,
-    y: 0.75, // firebase -1.25,
-    z: 0.65, // firebase 0,
-    rotation: 0,
-    a: 0.4,
-    b: 1,
-    decalPositionX: 0.29,
-    decalPositionY: 0.06,
-    decalPositionZ: 0.12,
-  })
+  // const levaControls = useControls({
+  //   aa: -3.58, // firebase -0.05,
+  //   bb: -4.4, // firebase -4.91,
+  //   cc: -0.35, // firebase -3.96,
+  //   x: 2, // firebase 1.25,
+  //   y: 0.75, // firebase -1.25,
+  //   z: 0.65, // firebase 0,
+  //   rotation: 0,
+  //   a: 0.4,
+  //   b: 1,
+  //   decalPositionX: 0.29,
+  //   decalPositionY: 0.06,
+  //   decalPositionZ: 0.12,
+  // })
 
   const rotations = {
     typescript: new Euler(-5.3, 2.16, -0.66),
