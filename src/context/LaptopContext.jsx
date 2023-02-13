@@ -5,7 +5,7 @@ import { useLaptop } from "./useLaptop"
 const [useLaptopContext, LaptopContextProvider] = createGenericContext()
 
 const LaptopProvider = ({ children }) => {
-  debugger
+  
   const [isClosed, setIsClosed] = useLaptop(true)
 
   return (
