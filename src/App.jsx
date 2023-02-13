@@ -7,6 +7,7 @@ import { customPointerEvents } from "./helpers/customPointerEvents"
 import EmptyLaptopScreen from "./ScreenAnimations/EmptyLaptopScreen"
 import BuildLaptopScreen from "./ScreenAnimations/BuildScreen"
 import OptimizeLaptopScreen from "./ScreenAnimations/OptimizeScreen"
+import DesignLaptopScreen from "./ScreenAnimations/DesignScreen"
 
 import {
   useGLTF,
@@ -224,6 +225,7 @@ function App(props) {
                     <iframe src="https://adriel-portf.web.app" />
                   </Html>
 
+                  <DesignLaptopScreen />
                   <BuildLaptopScreen />
                   <OptimizeLaptopScreen />
 
