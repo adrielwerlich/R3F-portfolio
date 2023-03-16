@@ -9,6 +9,15 @@ import BuildLaptopScreen from "./ScreenAnimations/BuildScreen"
 import OptimizeLaptopScreen from "./ScreenAnimations/OptimizeScreen"
 import DesignLaptopScreen from "./ScreenAnimations/DesignScreen"
 
+import { useControls } from "leva"
+
+import {
+  Physics,
+  RigidBody,
+  CuboidCollider,
+  InstancedRigidBodies,
+} from "@react-three/rapier"
+
 import {
   useGLTF,
   Environment,
@@ -28,7 +37,6 @@ import BuildExperience from "./Experiences/BuildExperience"
 import OptimizeExperience from "./Experiences/OptimizeExperience"
 
 function App(props) {
-
   const group = useRef()
   const laptopLight = useRef()
 
@@ -57,12 +65,58 @@ function App(props) {
 
   // const computer = useGLTF("./assets/notebookModel.gltf")
 
+  function ThreeObject(props) {
+    const { nodes, materials } = useGLTF("/models/three-model.glb")
+
+    const leva = useControls({
+      x: 5,
+      y: -1.25,
+      z: -0.25,
+      rotationY: 6,
+      rotationX: 9,
+      rotationZ: 6,
+    })
+    return (
+      <group {...props} dispose={null}>
+        <Text
+          font="./bangers-v20-latin-regular.woff"
+          fontSize={0.7}
+          position={[5, -1.25, -0.25]}
+          rotation={[leva.rotationX,leva.rotationY,leva.rotationZ]}
+          maxWidth={2}
+          textAlign="left"
+        >
+          React Three Fiber
+        </Text>
+        <RigidBody type="fixed" colliders="trimesh" rotation={[-2, 4, -6]}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.boxBase.geometry}
+            material={materials.boxBase}
+          />
+          <mesh
+            receiveShadow
+            geometry={nodes.boxBack.geometry}
+            material={materials.inside}
+          />
+          {/* <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Text.geometry}
+            material={materials.boxBase}
+          /> */}
+        </RigidBody>
+      </group>
+    )
+  }
+
   return (
     <>
       <Environment preset="city" />
 
-      <color args={["#695b5b"]} attach="background" />
-      <group position={[-0.5, .2, 0]} scale={0.6}>
+      <color args={["#0f59e2"]} attach="background" />
+      <group position={[-0.3, -0.3, 0.6]} scale={0.6}>
         <PresentationControls
           global
           rotation={[0.1, -0.5, 0.05]}
@@ -75,15 +129,6 @@ function App(props) {
             <BuildExperience />
             <OptimizeExperience />
             <Buttons />
-            {/* <rectAreaLight
-              width={2.5}
-              height={1.65}
-              intensity={65}
-              color={"blue"}
-              rotation={[0.1, Math.PI, 0]}
-              position={[0, 0.55, -1.15]}
-              scale={!isClosed && stageLevel === 1 ? 1 : 0}
-            /> */}
             <group
               {...customPointerEvents}
               onClick={handleClick}
@@ -229,6 +274,22 @@ function App(props) {
                   <BuildLaptopScreen />
                   <OptimizeLaptopScreen />
 
+                  <group position={[-8.3, -0.3, 6.6]} scale={0.9}>
+                    <Physics gravity={[0, -4, 0]}>
+                      <ThreeObject position={[1, 0, -1.5]} />
+                      <RigidBody
+                        position={[0, -1, 0]}
+                        type="fixed"
+                        colliders="false"
+                      >
+                        <CuboidCollider
+                          restitution={0.1}
+                          args={[1000, 1, 1000]}
+                        />
+                      </RigidBody>
+                    </Physics>
+                  </group>
+
                   <mesh
                     geometry={nodes.Circle002.geometry}
                     material={nodes.Circle002.material}
@@ -293,7 +354,12 @@ function App(props) {
         </PresentationControls>
       </group>
       {/* Reflection Plane */}
-      <mesh scale={50} rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.5, 0]} {...props}>
+      <mesh
+        scale={50}
+        rotation={[-Math.PI / 2, 0, 0]}
+        position={[0, -1.5, 0]}
+        {...props}
+      >
         <planeGeometry />
         <MeshReflectorMaterial
           blur={[300, 100]}
