@@ -68,21 +68,21 @@ function App(props) {
   function ThreeObject(props) {
     const { nodes, materials } = useGLTF("/models/three-model.glb")
 
-    const leva = useControls({
-      x: 5,
-      y: -1.25,
-      z: -0.25,
-      rotationY: 6,
-      rotationX: 9,
-      rotationZ: 6,
-    })
+    // const leva = useControls({
+    //   x: 5,
+    //   y: -1.25,
+    //   z: -0.25,
+    //   rotationY: 6,
+    //   rotationX: 9,
+    //   rotationZ: 6,
+    // })
     return (
       <group {...props} dispose={null}>
         <Text
           font="./bangers-v20-latin-regular.woff"
           fontSize={0.7}
           position={[5, -1.25, -0.25]}
-          rotation={[leva.rotationX,leva.rotationY,leva.rotationZ]}
+          rotation={[9, 6, 6]}
           maxWidth={2}
           textAlign="left"
         >
