@@ -1,0 +1,10 @@
+@font-face {
+    font-family: "AvertaStandardBlack";
+    src: url("./fonts/woff/Averta-Standard-Black.woff");
+}
+
+.to-car-link {
+    font-family: "AvertaStandardBlack";
+    font-size: 14px;
+    width: 120px;
+}

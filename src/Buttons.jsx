@@ -1,4 +1,4 @@
-import { Text } from "@react-three/drei"
+import { useGLTF, Text, Html } from "@react-three/drei"
 import { useState } from "react"
 import DesignIcon from "./Icons/DesignIcon"
 import PlanIcon from "./Icons/PlanIcon"
@@ -8,6 +8,9 @@ import { animated, useSpring } from "@react-spring/three"
 import { useStageLevelContext } from "./context/StageLevelContext"
 import { customPointerEvents } from "./helpers/customPointerEvents"
 import { useLaptopContext } from "./context/LaptopContext"
+import { useNavigate } from "react-router-dom"
+
+import "./fontStyle.css"
 
 // import { useControls } from "leva"
 
@@ -59,7 +62,6 @@ export default function Buttons(props) {
       <animated.group
         scale={0.4}
         position={spring.groupPosition}
-        // @ts-ignore
         rotation={spring.groupRotation}
         onPointerOver={() => {
           setSomethingHovered(true)
@@ -97,8 +99,48 @@ export default function Buttons(props) {
           type={"Optimize"}
           position-x={BUTTON_WIDTH * 3 + BUTTON_MARGIN * 3}
         />
+        <Button
+          somethingHovered={somethingHovered}
+          onClick={handleOptimizeButtonClick}
+          type={"Link"}
+        />
       </animated.group>
     </>
+  )
+}
+
+const DoorMesh = ({ scale = 0.3 }) => {
+  const { nodes } = useGLTF("/assets/door.gltf")
+
+  return (
+    <mesh
+      scale={scale}
+      geometry={nodes.Cube.geometry}
+      material={nodes.Cube.material}
+      position={[0, 1.34, 0]}
+    >
+      <mesh
+        geometry={nodes.Cube001.geometry}
+        material={nodes.Cube001.material}
+        position={[-0.69, -0.08, 0.17]}
+      >
+        <mesh
+          geometry={nodes.Cube002.geometry}
+          material={nodes.Cube002.material}
+          position={[0.53, -1.23, -0.17]}
+        />
+        <mesh
+          geometry={nodes.Plane.geometry}
+          material={nodes.Plane.material}
+          position={[1.27, 0, 0]}
+        />
+        <mesh
+          geometry={nodes.Sphere.geometry}
+          material={nodes.Sphere.material}
+          position={[1.31, 0, 0.05]}
+        />
+      </mesh>
+    </mesh>
   )
 }
 
@@ -159,72 +201,118 @@ function Button(props) {
   const AnimatedDesignIcon = animated(DesignIcon)
   const AnimatedBuildIcon = animated(BuildIcon)
   const AnimatedOptimizeIcon = animated(OptimizeIcon)
+  const AnimatedDoor = animated(DoorMesh)
+
   const AnimatedText = animated(Text)
 
+  const [linkHovered, setLinkHovered] = useState(false)
+  const navigate = useNavigate()
+
+  function goToCar() {
+    navigate("/car")
+  }
   return (
-    <group {...props}>
-      <AnimatedText
-        strokeOpacity={0}
-        fillOpacity={getLabelActivity()}
-        font={"./fonts/woff/Averta-Standard-Black.woff"}
-        color={spring.color}
-        fontSize={spring.textSize}
-        characters="PlanDesignBuOtmz"
-        anchorX={"center"}
-        anchorY={"middle"}
-        position={[-0.2, 2.5, 0]}
-        rotation={[0.122173, 0.296706, 0.03490659]}
-      >
-        {props.type}
-      </AnimatedText>
-      {props.type === "Plan" && (
-        // @ts-ignore
-        <AnimatedPlanIcon
-          scale={spring.scale}
-          position={spring.position}
-          rotation={[1.28, 0.21, -0.06]}
-        />
+    <>
+      {props.type === "Link" ? (
+        <group {...props} dispose={null} position={[3, 7, 1]}>
+          <mesh
+            position={[-0.125, 1, 0]}
+            {...customPointerEvents}
+            onPointerOver={(e) => {
+              e.stopPropagation()
+              customPointerEvents.onPointerOver()
+              setLinkHovered(true)
+            }}
+            onPointerOut={(e) => {
+              e.stopPropagation()
+              customPointerEvents.onPointerOut()
+              setLinkHovered(false)
+            }}
+            onClick={() => goToCar()}
+          >
+            <boxGeometry args={[1.6, 1.25, 1.5]} />
+            <meshStandardMaterial opacity={0} transparent />
+          </mesh>
+          <AnimatedText
+            strokeOpacity={0}
+            fillOpacity={linkHovered ? 1 : 0}
+            font={"./fonts/woff/Averta-Standard-Black.woff"}
+            color={spring.color}
+            fontSize={spring.textSize}
+            characters="PlanDesignBuOtmz"
+            anchorX={"center"}
+            anchorY={"middle"}
+            scale={5}
+            position={[-0.2, 0.1, 0]}
+            rotation={[0.122173, 0.296706, 0.03490659]}
+          >
+            Click to navigate using the car.
+          </AnimatedText>
+          <AnimatedDoor scale={linkHovered ? 0.6 : 0.3} />
+        </group>
+      ) : (
+        <group {...props}>
+          <AnimatedText
+            strokeOpacity={0}
+            fillOpacity={getLabelActivity()}
+            font={"./fonts/woff/Averta-Standard-Black.woff"}
+            color={spring.color}
+            fontSize={spring.textSize}
+            characters="PlanDesignBuOtmz"
+            anchorX={"center"}
+            anchorY={"middle"}
+            position={[-0.2, 2.5, 0]}
+            rotation={[0.122173, 0.296706, 0.03490659]}
+          >
+            {props.type}
+          </AnimatedText>
+          {props.type === "Plan" && (
+            <AnimatedPlanIcon
+              scale={spring.scale}
+              position={spring.position}
+              rotation={[1.28, 0.21, -0.06]}
+            />
+          )}
+          {props.type === "Design" && (
+            <AnimatedDesignIcon
+              scale={spring.scale}
+              position={spring.position}
+              rotation={[1.28, 0.21, -0.06]}
+            />
+          )}
+          {props.type === "Build" && (
+            <AnimatedBuildIcon
+              scale={spring.constrictedScale}
+              position={spring.constrictedPosition}
+              rotation={[1.4, 0.21, 0.16]}
+            />
+          )}
+          {props.type === "Optimize" && (
+            <AnimatedOptimizeIcon
+              scale={spring.scale}
+              position={spring.position}
+              rotation={[1.28, 0.21, -0.06]}
+            />
+          )}
+          <mesh
+            position={[-0.125, 1, 0]}
+            {...customPointerEvents}
+            onPointerOver={(e) => {
+              e.stopPropagation()
+              customPointerEvents.onPointerOver()
+              setHovered(true)
+            }}
+            onPointerOut={(e) => {
+              e.stopPropagation()
+              customPointerEvents.onPointerOut()
+              setHovered(false)
+            }}
+          >
+            <boxGeometry args={[1.6, 1.25, 1.5]} />
+            <meshStandardMaterial opacity={0} transparent />
+          </mesh>
+        </group>
       )}
-      {props.type === "Design" && (
-        // @ts-ignore
-        <AnimatedDesignIcon
-          scale={spring.scale}
-          position={spring.position}
-          rotation={[1.28, 0.21, -0.06]}
-        />
-      )}
-      {props.type === "Build" && (
-        <AnimatedBuildIcon
-          scale={spring.constrictedScale}
-          position={spring.constrictedPosition}
-          rotation={[1.4, 0.21, 0.16]}
-        />
-      )}
-      {props.type === "Optimize" && (
-        // @ts-ignore
-        <AnimatedOptimizeIcon
-          scale={spring.scale}
-          position={spring.position}
-          rotation={[1.28, 0.21, -0.06]}
-        />
-      )}
-      <mesh
-        position={[-0.125, 1, 0]}
-        {...customPointerEvents}
-        onPointerOver={(e) => {
-          e.stopPropagation()
-          customPointerEvents.onPointerOver()
-          setHovered(true)
-        }}
-        onPointerOut={(e) => {
-          e.stopPropagation()
-          customPointerEvents.onPointerOut()
-          setHovered(false)
-        }}
-      >
-        <boxGeometry args={[1.6, 1.25, 1.5]} />
-        <meshStandardMaterial opacity={0} transparent />
-      </mesh>
-    </group>
+    </>
   )
 }
