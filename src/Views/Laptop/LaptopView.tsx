@@ -1,11 +1,11 @@
 import React from "react"
 
-import LaptopAnimation from "../LaptopAnimation"
+import LaptopAnimation from "./LaptopAnimation"
 
 import { Canvas } from "@react-three/fiber"
 
-import { StageLevelProvider } from "../context/StageLevelContext"
-import { LaptopProvider } from "../context/LaptopContext"
+import { StageLevelProvider } from "../../context/StageLevelContext"
+import { LaptopProvider } from "../../context/LaptopContext"
 
 const LaptopView = () => {
   return (

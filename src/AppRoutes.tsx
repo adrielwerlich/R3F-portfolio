@@ -11,7 +11,7 @@ import {
 
 import Carview from "./Views/Car/CarView"
 
-import LaptopView from "./Views/LaptopView"
+import LaptopView from "./Views/Laptop/LaptopView"
 
 export const AppRoutes = () => {
   return (

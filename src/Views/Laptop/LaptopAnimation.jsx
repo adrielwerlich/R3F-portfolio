@@ -1,13 +1,12 @@
 import { useState, useRef, useEffect } from "react"
 import { animated, useSpring } from "@react-spring/three"
 
-import "./App.css"
-import { customPointerEvents } from "./helpers/customPointerEvents"
+import { customPointerEvents } from "../../helpers/customPointerEvents"
 
-import EmptyLaptopScreen from "./ScreenAnimations/EmptyLaptopScreen"
-import BuildLaptopScreen from "./ScreenAnimations/BuildScreen"
-import OptimizeLaptopScreen from "./ScreenAnimations/OptimizeScreen"
-import DesignLaptopScreen from "./ScreenAnimations/DesignScreen"
+import EmptyLaptopScreen from "../../ScreenAnimations/EmptyLaptopScreen"
+import BuildLaptopScreen from "../../ScreenAnimations/BuildScreen"
+import OptimizeLaptopScreen from "../../ScreenAnimations/OptimizeScreen"
+import DesignLaptopScreen from "../../ScreenAnimations/DesignScreen"
 
 import { useControls } from "leva"
 
@@ -29,13 +28,13 @@ import {
   Text,
 } from "@react-three/drei"
 
-import { useLaptopContext } from "./context/LaptopContext"
-import { useStageLevelContext } from "./context/StageLevelContext"
+import { useLaptopContext } from "../../context/LaptopContext"
+import { useStageLevelContext } from "../../context/StageLevelContext"
 
 import Buttons from "./Buttons"
-import BuildExperience from "./Experiences/BuildExperience"
-import OptimizeExperience from "./Experiences/OptimizeExperience"
-import LinkIcon from "./Icons/LinkIcon"
+import BuildExperience from "../../Experiences/BuildExperience"
+import OptimizeExperience from "../../Experiences/OptimizeExperience"
+import LinkIcon from "../../Icons/LinkIcon"
 
 function LaptopAnimation(props) {
   const group = useRef()
