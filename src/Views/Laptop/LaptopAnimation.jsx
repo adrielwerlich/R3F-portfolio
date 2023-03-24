@@ -1,13 +1,12 @@
 import { useState, useRef, useEffect } from "react"
 import { animated, useSpring } from "@react-spring/three"
 
-import "./App.css"
-import { customPointerEvents } from "./helpers/customPointerEvents"
+import { customPointerEvents } from "../../helpers/customPointerEvents"
 
-import EmptyLaptopScreen from "./ScreenAnimations/EmptyLaptopScreen"
-import BuildLaptopScreen from "./ScreenAnimations/BuildScreen"
-import OptimizeLaptopScreen from "./ScreenAnimations/OptimizeScreen"
-import DesignLaptopScreen from "./ScreenAnimations/DesignScreen"
+import EmptyLaptopScreen from "../../ScreenAnimations/EmptyLaptopScreen"
+import BuildLaptopScreen from "../../ScreenAnimations/BuildScreen"
+import OptimizeLaptopScreen from "../../ScreenAnimations/OptimizeScreen"
+import DesignLaptopScreen from "../../ScreenAnimations/DesignScreen"
 
 import { useControls } from "leva"
 
@@ -29,14 +28,15 @@ import {
   Text,
 } from "@react-three/drei"
 
-import { useLaptopContext } from "./context/LaptopContext"
-import { useStageLevelContext } from "./context/StageLevelContext"
+import { useLaptopContext } from "../../context/LaptopContext"
+import { useStageLevelContext } from "../../context/StageLevelContext"
 
 import Buttons from "./Buttons"
-import BuildExperience from "./Experiences/BuildExperience"
-import OptimizeExperience from "./Experiences/OptimizeExperience"
+import BuildExperience from "../../Experiences/BuildExperience"
+import OptimizeExperience from "../../Experiences/OptimizeExperience"
+import LinkIcon from "../../Icons/LinkIcon"
 
-function App(props) {
+function LaptopAnimation(props) {
   const group = useRef()
   const laptopLight = useRef()
 
@@ -100,12 +100,6 @@ function App(props) {
             geometry={nodes.boxBack.geometry}
             material={materials.inside}
           />
-          {/* <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Text.geometry}
-            material={materials.boxBase}
-          /> */}
         </RigidBody>
       </group>
     )
@@ -117,6 +111,8 @@ function App(props) {
 
       <color args={["#0f59e2"]} attach="background" />
       <group position={[-0.3, -0.3, 0.6]} scale={0.6}>
+        {/* <Link to="/car"> */}
+
         <PresentationControls
           global
           rotation={[0.1, -0.5, 0.05]}
@@ -173,62 +169,51 @@ function App(props) {
                   material={materials.Keyboard}
                 />
                 <mesh
-                  // @ts-ignore
                   geometry={nodes.KeyboardKeyHole.geometry}
-                  // @ts-ignore
                   material={nodes.KeyboardKeyHole.material}
                   position={[-11.79, -0.15, -8.3]}
                   scale={5.8}
                 />
                 <mesh
-                  // @ts-ignore
                   geometry={nodes.RubberFoot.geometry}
                   material={materials.DarkRubber}
                   position={[-11.95, -0.75, 7.86]}
                   scale={5.8}
                 />
                 <group position={[0.01, -0.21, -10.56]} scale={5.8}>
-                  {/* @ts-ignore  */}
                   <mesh
                     geometry={nodes.Circle012.geometry}
                     material={materials.HingeBlack}
                   />
-                  {/* @ts-ignore  */}
                   <mesh
                     geometry={nodes.Circle012_1.geometry}
                     material={materials.HingeMetal}
                   />
                 </group>
                 <group position={[0, -0.51, 0]} scale={5.8}>
-                  {/* @ts-ignore  */}
                   <mesh
                     geometry={nodes.Circle006.geometry}
                     material={nodes.Circle006.material}
                   />
-                  {/* @ts-ignore  */}
                   <mesh
                     geometry={nodes.Circle006_1.geometry}
                     material={nodes.Circle006_1.material}
                   />
                 </group>
                 <group position={[-11.79, -0.15, -8.3]} scale={5.8}>
-                  {/* @ts-ignore  */}
                   <mesh
                     geometry={nodes.Circle.geometry}
                     material={nodes.Circle.material}
                   />
-                  {/* @ts-ignore  */}
                   <mesh
                     geometry={nodes.Circle_1.geometry}
                     material={materials.Key}
                   />
-                  {/* @ts-ignore  */}
                   <mesh
                     geometry={nodes.Circle_2.geometry}
                     material={materials.Touchbar}
                   />
                 </group>
-                {/* --Screen Hinge-- */}
 
                 <animated.group
                   position={[0.01, -0.47, -10.41]}
@@ -236,7 +221,6 @@ function App(props) {
                   scale={5.8}
                 >
                   <mesh
-                    // @ts-ignore
                     geometry={nodes.FrontCameraRing001.geometry}
                     material={materials["CameraRIngBlack.002"]}
                     position={[-0.15, 19.57, -16.15]}
@@ -380,4 +364,4 @@ function App(props) {
   )
 }
 
-export default App
+export default LaptopAnimation

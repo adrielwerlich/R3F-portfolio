@@ -15,6 +15,24 @@ export default function Model(props) {
     ref.current.quaternion.copy(quaternion)
     ref.current.position.x = Math.sin(angle) * 5
     ref.current.position.z = Math.cos(angle) * 5
+
+    // console.log(ref.current.position, 'vehicle position321')
+
+
+    // const cameraPosition = new THREE.Vector3()
+    // cameraPosition.copy(ref.current.position)
+    // cameraPosition.z += 2.25
+    // cameraPosition.y += 0.65
+
+    // const cameraTarget = new THREE.Vector3()
+    // cameraTarget.copy(ref.current.position)
+    // cameraTarget.y += 0.25
+
+    // smoothedCameraPosition.lerp(cameraPosition, 0.1)
+    // smoothedCameraTarget.lerp(cameraTarget, 0.1)
+
+    // state.camera.position.copy(smoothedCameraPosition)
+    // state.camera.lookAt(smoothedCameraTarget)
   })
 
   return (
