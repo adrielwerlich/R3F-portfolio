@@ -8,7 +8,6 @@ import type {
   MeshStandardMaterialProps,
   ThreeEvent,
 } from "@react-three/fiber"
-import * as THREE from "three"
 
 import type {
   CylinderArgs,
@@ -146,39 +145,22 @@ function Mug() {
   )
 }
 
-function DummyBoy({ position, scale }) {
-  const dummy = useGLTF("/assets/characterAdrielFace.glb")
-  console.log(dummy, "dummy")
-  const [ref] = useCylinder(
-    () => ({
-      args: [0.6, 0.6, 1, 16],
-      mass: 1,
-      position: position,
-      rotation: [0, 0, 0],
-    }),
-    useRef<Group>(null)
-  )
-  const bind = useDragConstraint(ref)
-
-  let mixer
-  if (dummy.animations.length) {
-    mixer = new THREE.AnimationMixer(dummy.scene)
-    // dummy.animations.forEach(clip => {
-    const idleClipAnimation = dummy.animations[0]
-    const action = mixer.clipAction(idleClipAnimation)
-    action.play()
-    // });
-  }
-
-  useFrame((state, delta) => {
-    mixer?.update(delta)
-  })
-
-  return (
-    <group ref={ref} {...bind} dispose={null}>
-      <primitive object={dummy.scene} scale={scale} />
+function DummyBoy({position, scale}) {
+    const { scene } = useGLTF('/assets/characterAdrielFace.glb')
+    const [ref] = useCylinder(
+      () => ({
+        args: [0.6, 0.6, 1, 16],
+        mass: 1,
+        position: position,
+        rotation: [0, 0, 0],
+      }),
+      useRef<Group>(null)
+    )
+    const bind = useDragConstraint(ref)
+    return <group ref={ref} {...bind} dispose={null}>
+       <primitive object={scene} scale={scale} />
     </group>
-  )
+
 }
 
 function Table() {
@@ -186,13 +168,11 @@ function Table() {
     () => ({ args: [2.5, 0.25, 2.5], position: [9, 2.1, 0], type: "Static" }),
     useRef<Mesh>(null)
   )
-  const [leg1] = useBox(
-    // front left leg
+  const [leg1] = useBox( // front left leg
     () => ({ args: [0.25, 2, 0.25], position: [7.9, 1, 1.14], type: "Static" }),
     useRef<Mesh>(null)
   )
-  const [leg2] = useBox(
-    // front right leg
+  const [leg2] = useBox( // front right leg
     () => ({
       args: [0.25, 2, 0.25],
       position: [10.1, 1, 1.14],
@@ -200,8 +180,7 @@ function Table() {
     }),
     useRef<Mesh>(null)
   )
-  const [leg3] = useBox(
-    // back left leg
+  const [leg3] = useBox( // back left leg
     () => ({
       args: [0.25, 2, 0.25],
       position: [7.9, 1, -1.14],
@@ -209,8 +188,7 @@ function Table() {
     }),
     useRef<Mesh>(null)
   )
-  const [leg4] = useBox(
-    // back right leg
+  const [leg4] = useBox( // back right leg
     () => ({
       args: [0.25, 2, 0.25],
       position: [10.1, 1, -1.14],
@@ -296,24 +274,20 @@ function Chair() {
     // color: "#303030",
     // openX: 0.6,
     // openX: 0.29,
-    x: -0.65,
+    x: -.65,
     y: -3.5,
-    z: 0.05,
+    z: .05,
     // -.85, -3.5, 0
   })
   // leva.x, leva.y, leva.z
   return (
-    <group ref={ref} {...bind}>
+    <group ref={ref} {...bind} >
       <Box position={[0, -2, 0]} scale={[1.5, 1.5, 0.25]} /> // back
       <Box position={[0, -2.75, 1.15]} scale={[1.5, 0.25, 2]} /> // seat
-      <Box position={[-0.65, -3.5, 0.05]} scale={[0.25, 1.5, 0.25]} /> // right
-      back leg
-      <Box position={[0.65, -3.5, 0]} scale={[0.25, 1.5, 0.25]} /> // left back
-      leg
-      <Box position={[-0.65, -3.5, 2.1]} scale={[0.25, 1.5, 0.25]} /> // right
-      front leg
-      <Box position={[0.65, -3.5, 2.1]} scale={[0.25, 1.5, 0.25]} /> // left
-      front leg
+      <Box position={[-.65, -3.5, .05]} scale={[0.25, 1.5, 0.25]} /> // right back leg
+      <Box position={[.65, -3.5, 0]} scale={[0.25, 1.5, 0.25]} /> // left back leg
+      <Box position={[-.65, -3.5, 2.1]} scale={[0.25, 1.5, 0.25]} /> // right front leg
+      <Box position={[.65, -3.5, 2.1 ]} scale={[0.25, 1.5, 0.25]} /> // left front leg
     </group>
   )
 }
@@ -386,7 +360,7 @@ const Carview = () => {
 
             <Chair />
             <Table />
-            <DummyBoy position={[3, 0, 4]} scale={0.5} />
+            <DummyBoy position={[3, 0, 4]} scale={.5} />
           </ToggledDebug>
         </Physics>
         <Suspense fallback={null}>

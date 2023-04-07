@@ -10,10 +10,9 @@ function useKeyControls(
       if (!isKeyCode(key)) return
       if (key === "c" && current[map[key]]) {
         current[map[key]] = false
-      } else {
-        current[map[key]] = true
       }
 
+      current[map[key]] = true
     }
     window.addEventListener("keydown", handleKeydown)
     const handleKeyup = ({ key }: KeyboardEvent) => {
