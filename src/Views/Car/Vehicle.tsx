@@ -95,7 +95,7 @@ function Vehicle({
       angularVelocity,
       args: [1.7, 1, 4],
       mass: 500,
-      onCollide: (e) => console.log("bonk", e.body.userData),
+      onCollide: (e) => {}, // console.log("bonk", e.body.userData),
       position,
       rotation,
     }),
@@ -112,19 +112,19 @@ function Vehicle({
   )
 
   useFrame((state) => {
-    const { backward, brake, forward, left, reset, right, cameraFollow } =
+    const { backward, brake, forward, left, reset, right, cameraFollow, boost } =
       controls.current
 
     for (let e = 2; e < 4; e++) {
       vehicleApi.applyEngineForce(
-        forward || backward ? force * (forward && !backward ? -3 : 6) : 0,
+        forward || backward ? force * (forward && !backward ? boost ? -4 : -2 : boost ? 10 : 6) : 0,
         2
       )
     }
 
     for (let s = 0; s < 2; s++) {
       vehicleApi.setSteeringValue(
-        left || right ? steer * (left && !right ? 1 : -1) : 0,
+        left || right ? steer * (left && !right ? boost ? 2.2 : 1.6 : boost ? -2.2 : -1.6) : 0,
         s
       )
     }

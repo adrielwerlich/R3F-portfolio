@@ -148,7 +148,6 @@ function Mug() {
 
 function DummyBoy({ position, scale }) {
   const dummy = useGLTF("/assets/characterAdrielFace.glb")
-  console.log(dummy, "dummy")
   const [ref] = useCylinder(
     () => ({
       args: [0.6, 0.6, 1, 16],
@@ -339,7 +338,7 @@ const Carview = () => {
     <>
       <Canvas
         shadows
-        camera={{ fov: 50, position: [0, 5, 15], near: 0.1, far: 200 }}
+        camera={{ fov: 10000, position: [0, 5, 15], near: 0.1, far: 2000 }}
       >
         <fog attach="fog" args={["#171720", 10, 50]} />
         <color attach="background" args={["#7aaeeb"]} />

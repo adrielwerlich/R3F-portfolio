@@ -63,18 +63,12 @@ export default function LinkIcon(props) {
         position={[-0.125, 1, 0]}
         {...customPointerEvents}
         onPointerOver={(e) => {
-          debugger
-          // e.stopPropagation()
-          // customPointerEvents.onPointerOver()
           setHovered(true)
           
         }}
         onPointerOut={(e) => {
           e.stopPropagation()
           customPointerEvents.onPointerOut()
-          console.log("hovered", isHovered)
-          // setTimeout(() => {
-          // }, 300);
           setHovered(false)
         }}
       >
