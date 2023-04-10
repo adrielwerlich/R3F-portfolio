@@ -176,7 +176,7 @@ function DummyBoy({ position, scale }) {
 
   return (
     <group ref={ref} {...bind} dispose={null}>
-      <primitive object={dummy.scene} position={[0,-.49,0]} scale={scale} />
+      <primitive object={dummy.scene} scale={scale} />
     </group>
   )
 }
@@ -386,7 +386,7 @@ const Carview = () => {
 
             <Chair />
             <Table />
-            <DummyBoy position={[3, 3, 4]} scale={0.5} />
+            <DummyBoy position={[3, .5, 4]} scale={0.5} />
           </ToggledDebug>
         </Physics>
         <Suspense fallback={null}>
