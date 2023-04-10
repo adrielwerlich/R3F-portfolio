@@ -176,7 +176,7 @@ function DummyBoy({ position, scale }) {
 
   return (
     <group ref={ref} {...bind} dispose={null}>
-      <primitive object={dummy.scene} position={[0,-.49,0]} scale={scale} />
+      <primitive object={dummy.scene} position={[0,-.45,0]} scale={scale} />
     </group>
   )
 }
