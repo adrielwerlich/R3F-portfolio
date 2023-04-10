@@ -36,6 +36,7 @@ const keyControlMap = {
   ArrowLeft: "left",
   ArrowRight: "right",
   ArrowUp: "forward",
+  Shift: "boost",
   a: "left",
   d: "right",
   r: "reset",
@@ -59,6 +60,7 @@ export function useControls() {
     reset: false,
     right: false,
     cameraFollow: false,
+    boost: false,
   })
 
   useKeyControls(controls, keyControlMap)
