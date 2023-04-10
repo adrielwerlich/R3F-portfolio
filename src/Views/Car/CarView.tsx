@@ -338,7 +338,7 @@ const Carview = () => {
     <>
       <Canvas
         shadows
-        camera={{ fov: 1000, position: [0, 5, 15], near: 0.1, far: 2000 }}
+        camera={{ fov: 100, position: [0, 5, 15], near: 0.1, far: 2000 }}
       >
         <fog attach="fog" args={["#171720", 10, 50]} />
         <color attach="background" args={["#7aaeeb"]} />
