@@ -1,0 +1,73 @@
+{
+  "_from": "@remotion/eslint-config@3.3.83",
+  "_id": "@remotion/eslint-config@3.3.83",
+  "_inBundle": false,
+  "_integrity": "sha512-NVZxdw78vdRQkJnKwjxkdsZROxyQN2eXZOcRyvRRsCUeRFUTLoQci4wQ6TvCh0u2QETW8hmOKxjlsEnTWGXV9A==",
+  "_location": "/@remotion/eslint-config",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "@remotion/eslint-config@3.3.83",
+    "name": "@remotion/eslint-config",
+    "escapedName": "@remotion%2feslint-config",
+    "scope": "@remotion",
+    "rawSpec": "3.3.83",
+    "saveSpec": null,
+    "fetchSpec": "3.3.83"
+  },
+  "_requiredBy": [
+    "#DEV:/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@remotion/eslint-config/-/eslint-config-3.3.83.tgz",
+  "_shasum": "f8bbccae9aab3cbbf0f02a9a3952aad3a1cc3026",
+  "_spec": "@remotion/eslint-config@3.3.83",
+  "_where": "D:\\projects\\vite-and-react\\test-remotion\\remotion-test\\my-video",
+  "author": {
+    "name": "Jonny Burger",
+    "email": "jonny@remotion.dev"
+  },
+  "bugs": {
+    "url": "https://github.com/remotion-dev/remotion/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "@remotion/eslint-plugin": "3.3.83",
+    "@typescript-eslint/eslint-plugin": "5.19.0",
+    "@typescript-eslint/parser": "5.19.0",
+    "eslint-plugin-10x": "1.5.2",
+    "eslint-plugin-react": "7.29.4",
+    "eslint-plugin-react-hooks": "4.4.0"
+  },
+  "deprecated": false,
+  "description": "",
+  "devDependencies": {
+    "@types/node": "17.0.17",
+    "eslint": "8.25.0",
+    "typescript": "^4.7.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "remotion",
+    "ffmpeg",
+    "video",
+    "react",
+    "player"
+  ],
+  "license": "ISC",
+  "main": "dist/index.js",
+  "name": "@remotion/eslint-config",
+  "peerDependencies": {
+    "eslint": ">=7.15.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -d",
+    "watch": "tsc -w"
+  },
+  "version": "3.3.83"
+}

@@ -1,0 +1,61 @@
+{
+  "_from": "@remotion/eslint-plugin@3.3.83",
+  "_id": "@remotion/eslint-plugin@3.3.83",
+  "_inBundle": false,
+  "_integrity": "sha512-p+Rx0/z85TYkK2lF+JNd0i+4dh/DtzeGBTFq3xyf1Xzey7W09roSAqNovckTZrs0NoaOyMfe0Idi676dhuldZg==",
+  "_location": "/@remotion/eslint-plugin",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "@remotion/eslint-plugin@3.3.83",
+    "name": "@remotion/eslint-plugin",
+    "escapedName": "@remotion%2feslint-plugin",
+    "scope": "@remotion",
+    "rawSpec": "3.3.83",
+    "saveSpec": null,
+    "fetchSpec": "3.3.83"
+  },
+  "_requiredBy": [
+    "/@remotion/eslint-config"
+  ],
+  "_resolved": "https://registry.npmjs.org/@remotion/eslint-plugin/-/eslint-plugin-3.3.83.tgz",
+  "_shasum": "a4b628e941b88702016e8205105c07557f80a6a9",
+  "_spec": "@remotion/eslint-plugin@3.3.83",
+  "_where": "D:\\projects\\vite-and-react\\test-remotion\\remotion-test\\my-video\\node_modules\\@remotion\\eslint-config",
+  "author": {
+    "name": "Jonny Burger",
+    "email": "jonny@remotion.dev"
+  },
+  "bugs": {
+    "url": "https://github.com/remotion-dev/remotion/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "@typescript-eslint/utils": "5.19.0"
+  },
+  "deprecated": false,
+  "description": "A set of rules helping you avoid common pitfalls in Remotion.",
+  "devDependencies": {
+    "eslint": "8.25.0",
+    "typescript": "^4.7.0",
+    "vitest": "0.24.3"
+  },
+  "keywords": [
+    "eslint",
+    "eslintplugin"
+  ],
+  "license": "ISC",
+  "main": "dist/index.js",
+  "name": "@remotion/eslint-plugin",
+  "peerDependencies": {
+    "eslint": ">=7.0.0"
+  },
+  "private": false,
+  "scripts": {
+    "build": "tsc -d",
+    "test": "vitest --run",
+    "watch": "tsc -w"
+  },
+  "version": "3.3.83"
+}

@@ -34,7 +34,6 @@ import { useStageLevelContext } from "../../context/StageLevelContext"
 import Buttons from "./Buttons"
 import BuildExperience from "../../Experiences/BuildExperience"
 import OptimizeExperience from "../../Experiences/OptimizeExperience"
-import LinkIcon from "../../Icons/LinkIcon"
 
 function LaptopAnimation(props) {
   const group = useRef()

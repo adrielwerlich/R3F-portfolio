@@ -1,4 +1,4 @@
-import { useGLTF, Text, Html } from "@react-three/drei"
+import { useGLTF, Text } from "@react-three/drei"
 import { useState } from "react"
 import DesignIcon from "../../Icons/DesignIcon"
 import PlanIcon from "../../Icons/PlanIcon"
@@ -11,8 +11,6 @@ import { useLaptopContext } from "../../context/LaptopContext"
 import { useNavigate } from "react-router-dom"
 
 import "./fontStyle.css"
-
-// import { useControls } from "leva"
 
 const BUTTON_WIDTH = 1.5
 const BUTTON_MARGIN = 0.1
@@ -197,6 +195,8 @@ function Button(props) {
     config: { mass: 1.5, tension: 300 },
   })
 
+  console.log(spring.textSize , '111')
+
   const AnimatedPlanIcon = animated(PlanIcon)
   const AnimatedDesignIcon = animated(DesignIcon)
   const AnimatedBuildIcon = animated(BuildIcon)
@@ -238,7 +238,7 @@ function Button(props) {
             fillOpacity={linkHovered ? 1 : 0}
             font={"./fonts/woff/Averta-Standard-Black.woff"}
             color={spring.color}
-            fontSize={spring.textSize}
+            fontSize={.1}
             characters="PlanDesignBuOtmz"
             anchorX={"center"}
             anchorY={"middle"}

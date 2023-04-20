@@ -1,0 +1,47 @@
+{
+  "_from": "@remotion/compositor-win32-x64-msvc@3.3.83",
+  "_id": "@remotion/compositor-win32-x64-msvc@3.3.83",
+  "_inBundle": false,
+  "_integrity": "sha512-NEcX6FyhSWX3UD/3cpOtngDVMXtP41wOsCcb1X6ujO41/6N/9QhUbKdURvUigpaAQ7GAiobGIfwdIsB9Mgp3kw==",
+  "_location": "/@remotion/compositor-win32-x64-msvc",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "@remotion/compositor-win32-x64-msvc@3.3.83",
+    "name": "@remotion/compositor-win32-x64-msvc",
+    "escapedName": "@remotion%2fcompositor-win32-x64-msvc",
+    "scope": "@remotion",
+    "rawSpec": "3.3.83",
+    "saveSpec": null,
+    "fetchSpec": "3.3.83"
+  },
+  "_requiredBy": [
+    "/@remotion/renderer"
+  ],
+  "_resolved": "https://registry.npmjs.org/@remotion/compositor-win32-x64-msvc/-/compositor-win32-x64-msvc-3.3.83.tgz",
+  "_shasum": "0677c680340721332dd00f05e90aafdbbb91e5ea",
+  "_spec": "@remotion/compositor-win32-x64-msvc@3.3.83",
+  "_where": "D:\\projects\\vite-and-react\\test-remotion\\remotion-test\\my-video\\node_modules\\@remotion\\renderer",
+  "bundleDependencies": false,
+  "cpu": [
+    "x64"
+  ],
+  "deprecated": false,
+  "exports": {
+    ".": {
+      "require": "./index.js",
+      "import": "./index.mjs",
+      "types": "./index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "name": "@remotion/compositor-win32-x64-msvc",
+  "os": [
+    "win32"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "3.3.83"
+}

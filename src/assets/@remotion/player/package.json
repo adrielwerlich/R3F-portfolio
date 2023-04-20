@@ -1,0 +1,114 @@
+{
+  "_from": "@remotion/player@3.3.83",
+  "_id": "@remotion/player@3.3.83",
+  "_inBundle": false,
+  "_integrity": "sha512-Een+tMSmZ0+LgrJu8dKIQkPywoYA7iUUJQSxV3mLxHdHa25kPInURNo9OCsV3QzXaK02y9Bhf/8p7C+yVdwHmg==",
+  "_location": "/@remotion/player",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "@remotion/player@3.3.83",
+    "name": "@remotion/player",
+    "escapedName": "@remotion%2fplayer",
+    "scope": "@remotion",
+    "rawSpec": "3.3.83",
+    "saveSpec": null,
+    "fetchSpec": "3.3.83"
+  },
+  "_requiredBy": [
+    "/@remotion/cli"
+  ],
+  "_resolved": "https://registry.npmjs.org/@remotion/player/-/player-3.3.83.tgz",
+  "_shasum": "5e72688bc3840c2b24cb3952b9e32e688ba1dc13",
+  "_spec": "@remotion/player@3.3.83",
+  "_where": "D:\\projects\\vite-and-react\\test-remotion\\remotion-test\\my-video\\node_modules\\@remotion\\cli",
+  "author": {
+    "name": "Jonny Burger",
+    "email": "jonny@remotion.dev"
+  },
+  "bugs": {
+    "url": "https://github.com/remotion-dev/remotion/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "remotion": "3.3.83"
+  },
+  "deprecated": false,
+  "description": "Remotion Player",
+  "devDependencies": {
+    "@jonny/eslint-config": "3.0.273",
+    "@rollup/plugin-typescript": "^8.2.0",
+    "@testing-library/react": "13.1.1",
+    "@types/node": "^14.14.14",
+    "@types/react": "18.0.26",
+    "@types/react-dom": "18.0.10",
+    "@vitejs/plugin-react": "^2.0.0",
+    "csstype": "^3.1.1",
+    "eslint": "8.25.0",
+    "eslint-plugin-require-extensions": "^0.1.2",
+    "jsdom": "20.0.1",
+    "prettier": "^2.7.1",
+    "prettier-plugin-organize-imports": "^2.3.4",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "rollup": "^2.70.1",
+    "typescript": "^4.7.0",
+    "vitest": "0.24.3",
+    "webpack": "5.76.1"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./dist/cjs/index.d.ts",
+      "module": "./dist/esm/index.mjs",
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "homepage": "https://github.com/remotion-dev/remotion#readme",
+  "keywords": [
+    "remotion",
+    "ffmpeg",
+    "video",
+    "react",
+    "player"
+  ],
+  "license": "SEE LICENSE IN LICENSE.md",
+  "main": "dist/cjs/index.js",
+  "maintainers": [
+    {
+      "name": "Jonny Burger",
+      "email": "jonny@remotion.dev"
+    },
+    {
+      "name": "Shankhadeep Dey",
+      "email": "shankhadeepdey99@gmail.com"
+    }
+  ],
+  "module": "dist/esm/index.mjs",
+  "name": "@remotion/player",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "url": "git+https://github.com/remotion-dev/remotion.git"
+  },
+  "scripts": {
+    "build": "node ensure-correct-version.js && rollup --config rollup.config.js && tsc -d",
+    "lint": "eslint src --ext ts,tsx",
+    "prerelease": "cp ../../README.md .",
+    "watch": "tsc -w"
+  },
+  "sideEffects": false,
+  "types": "dist/cjs/index.d.ts",
+  "version": "3.3.83"
+}

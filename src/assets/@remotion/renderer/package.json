@@ -1,0 +1,108 @@
+{
+  "_from": "@remotion/renderer@3.3.83",
+  "_id": "@remotion/renderer@3.3.83",
+  "_inBundle": false,
+  "_integrity": "sha512-GxwI4R1umICXtaRBju/ucHZWfjdilHdZzaneJQSUWKrfCZonbuGG7rORF3b8zrdYQZaQcnAx0kZAir4Lmm/KYg==",
+  "_location": "/@remotion/renderer",
+  "_phantomChildren": {
+    "whatwg-url": "7.1.0"
+  },
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "@remotion/renderer@3.3.83",
+    "name": "@remotion/renderer",
+    "escapedName": "@remotion%2frenderer",
+    "scope": "@remotion",
+    "rawSpec": "3.3.83",
+    "saveSpec": null,
+    "fetchSpec": "3.3.83"
+  },
+  "_requiredBy": [
+    "/@remotion/cli"
+  ],
+  "_resolved": "https://registry.npmjs.org/@remotion/renderer/-/renderer-3.3.83.tgz",
+  "_shasum": "0c80839c3aa77979b9c7025c389ac7822228ff44",
+  "_spec": "@remotion/renderer@3.3.83",
+  "_where": "D:\\projects\\vite-and-react\\test-remotion\\remotion-test\\my-video\\node_modules\\@remotion\\cli",
+  "author": {
+    "name": "Jonny Burger",
+    "email": "jonny@remotion.dev"
+  },
+  "bugs": {
+    "url": "https://github.com/remotion-dev/remotion/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "@remotion/compositor-darwin-arm64": "3.3.83",
+    "@remotion/compositor-darwin-x64": "3.3.83",
+    "@remotion/compositor-linux-arm64-gnu": "3.3.83",
+    "@remotion/compositor-linux-arm64-musl": "3.3.83",
+    "@remotion/compositor-linux-x64-gnu": "3.3.83",
+    "@remotion/compositor-linux-x64-musl": "3.3.83",
+    "@remotion/compositor-win32-x64-msvc": "3.3.83",
+    "execa": "5.1.1",
+    "extract-zip": "2.0.1",
+    "remotion": "3.3.83",
+    "source-map": "^0.8.0-beta.0",
+    "ws": "8.7.0"
+  },
+  "deprecated": false,
+  "description": "Renderer for Remotion",
+  "devDependencies": {
+    "@jonny/eslint-config": "3.0.266",
+    "@testing-library/dom": "^8.16.0",
+    "@testing-library/react": "13.3.0",
+    "@types/node": "^16.7.5",
+    "@types/progress": "2.0.5",
+    "@types/react": "18.0.26",
+    "@types/react-dom": "18.0.10",
+    "eslint": "8.25.0",
+    "prettier": "^2.7.1",
+    "prettier-plugin-organize-imports": "^2.3.4",
+    "react": "18.0.0",
+    "react-dom": "18.0.0",
+    "typescript": "^4.7.0",
+    "vitest": "0.24.3"
+  },
+  "homepage": "https://github.com/remotion-dev/remotion#readme",
+  "keywords": [
+    "remotion",
+    "ffmpeg",
+    "video",
+    "react",
+    "player"
+  ],
+  "license": "SEE LICENSE IN LICENSE.md",
+  "main": "dist/index.js",
+  "name": "@remotion/renderer",
+  "optionalDependencies": {
+    "@remotion/compositor-darwin-arm64": "3.3.83",
+    "@remotion/compositor-darwin-x64": "3.3.83",
+    "@remotion/compositor-linux-arm64-gnu": "3.3.83",
+    "@remotion/compositor-linux-arm64-musl": "3.3.83",
+    "@remotion/compositor-linux-x64-gnu": "3.3.83",
+    "@remotion/compositor-linux-x64-musl": "3.3.83",
+    "@remotion/compositor-win32-x64-msvc": "3.3.83"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "url": "git+https://github.com/remotion-dev/remotion.git"
+  },
+  "scripts": {
+    "build": "node build.mjs && tsc -d",
+    "build-all": "node build.mjs --all",
+    "lint": "eslint src --ext ts,tsx",
+    "test": "vitest --run",
+    "watch": "tsc -w"
+  },
+  "sideEffects": false,
+  "types": "dist/index.d.ts",
+  "version": "3.3.83"
+}

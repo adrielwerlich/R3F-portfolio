@@ -1,0 +1,77 @@
+{
+  "_from": "@remotion/media-utils@3.3.83",
+  "_id": "@remotion/media-utils@3.3.83",
+  "_inBundle": false,
+  "_integrity": "sha512-+I3SdgLrD/0hGBdLqDmFbsh+WcCeMI7pKlha//8+BmBZojr0jFDMVfVRE7Musf/rGsjDX3zvTP2mi1yalvHRyQ==",
+  "_location": "/@remotion/media-utils",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "@remotion/media-utils@3.3.83",
+    "name": "@remotion/media-utils",
+    "escapedName": "@remotion%2fmedia-utils",
+    "scope": "@remotion",
+    "rawSpec": "3.3.83",
+    "saveSpec": null,
+    "fetchSpec": "3.3.83"
+  },
+  "_requiredBy": [
+    "/",
+    "/@remotion/cli"
+  ],
+  "_resolved": "https://registry.npmjs.org/@remotion/media-utils/-/media-utils-3.3.83.tgz",
+  "_shasum": "a5849a9a802bbb4f8b7eace5cadf8a0c79ce888b",
+  "_spec": "@remotion/media-utils@3.3.83",
+  "_where": "D:\\projects\\vite-and-react\\test-remotion\\remotion-test\\my-video",
+  "author": {
+    "name": "Jonny Burger",
+    "email": "jonny@remotion.dev"
+  },
+  "bugs": {
+    "url": "https://github.com/remotion-dev/remotion/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "remotion": "3.3.83"
+  },
+  "deprecated": false,
+  "description": "Utility functions for audio and video",
+  "devDependencies": {
+    "@jonny/eslint-config": "3.0.266",
+    "@types/node": "^16.7.5",
+    "@types/react": "18.0.26",
+    "eslint": "8.25.0",
+    "prettier": "^2.7.1",
+    "prettier-plugin-organize-imports": "^2.3.4",
+    "typescript": "^4.7.0"
+  },
+  "homepage": "https://github.com/remotion-dev/remotion#readme",
+  "keywords": [
+    "remotion",
+    "ffmpeg",
+    "video",
+    "react",
+    "player"
+  ],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "name": "@remotion/media-utils",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "url": "git+https://github.com/remotion-dev/remotion.git"
+  },
+  "scripts": {
+    "build": "tsc -d",
+    "lint": "eslint src --ext ts,tsx",
+    "watch": "tsc -w"
+  },
+  "sideEffects": false,
+  "version": "3.3.83"
+}

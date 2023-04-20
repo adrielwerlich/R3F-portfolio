@@ -1,0 +1,90 @@
+{
+  "_from": "@remotion/three@3.3.83",
+  "_id": "@remotion/three@3.3.83",
+  "_inBundle": false,
+  "_integrity": "sha512-9lezTgSfFZNDZwevVnxVzsmNX0MPhFJxTCh6WzmjydXJvgw0TK/B/es+ZwbIgeaycQ3DTeZsJVdvRWgxB3s/Vg==",
+  "_location": "/@remotion/three",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "@remotion/three@3.3.83",
+    "name": "@remotion/three",
+    "escapedName": "@remotion%2fthree",
+    "scope": "@remotion",
+    "rawSpec": "3.3.83",
+    "saveSpec": null,
+    "fetchSpec": "3.3.83"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@remotion/three/-/three-3.3.83.tgz",
+  "_shasum": "97b0a5c29ce8917b1013a864757ed1069fcea2aa",
+  "_spec": "@remotion/three@3.3.83",
+  "_where": "D:\\projects\\vite-and-react\\test-remotion\\remotion-test\\my-video",
+  "author": {
+    "name": "Björn Zeutzheim"
+  },
+  "bugs": {
+    "url": "https://github.com/remotion-dev/remotion/issues"
+  },
+  "bundleDependencies": false,
+  "contributors": [],
+  "dependencies": {
+    "remotion": "3.3.83"
+  },
+  "deprecated": false,
+  "description": "Utility functions for using react-three-fiber with remotion",
+  "devDependencies": {
+    "@jonny/eslint-config": "3.0.266",
+    "@react-three/fiber": ">=8.0.0",
+    "@rollup/plugin-typescript": "^8.2.0",
+    "@types/node": "^14.14.14",
+    "@types/react": "18.0.26",
+    "@types/react-reconciler": "^0.26.4",
+    "@types/three": "^0.134.0",
+    "@types/web": "0.0.78",
+    "eslint": "8.25.0",
+    "prettier": "^2.7.1",
+    "prettier-plugin-organize-imports": "^2.3.4",
+    "react": "18.0.0",
+    "react-dom": "18.0.0",
+    "rollup": "^2.70.1",
+    "three": "^0.145.0",
+    "typescript": "^4.7.0"
+  },
+  "homepage": "https://github.com/remotion-dev/remotion#readme",
+  "keywords": [
+    "remotion",
+    "ffmpeg",
+    "video",
+    "react",
+    "three",
+    "player"
+  ],
+  "license": "MIT",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.mjs",
+  "name": "@remotion/three",
+  "peerDependencies": {
+    "@react-three/fiber": ">=8.0.0",
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0",
+    "three": ">=0.137.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "url": "git+https://github.com/remotion-dev/remotion.git"
+  },
+  "scripts": {
+    "build": "rollup --config rollup.config.js && tsc -d",
+    "lint": "eslint src --ext ts,tsx",
+    "watch": "tsc -w"
+  },
+  "sideEffects": false,
+  "types": "dist/cjs/index.d.ts",
+  "version": "3.3.83"
+}
