@@ -5,7 +5,10 @@ import { AppRoutes } from "./AppRoutes"
 
 import "./index.css"
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+window.rootEl = document.getElementById("root")
+window.rootEl.isDarkModeOn = true
+
+ReactDOM.createRoot(window.rootEl).render(
   // <StrictMode></StrictMode>
   <React.Suspense fallback={null}>
     <BrowserRouter>

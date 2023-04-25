@@ -24,7 +24,7 @@ import { animated } from "@react-spring/three"
 
 import { Environment, OrbitControls, Text } from "@react-three/drei"
 
-import { Suspense } from "react"
+import { Suspense, useEffect } from "react"
 import React from "react"
 
 import { useToggledControl } from "./use-toggled-control"
@@ -36,19 +36,13 @@ import { useControls } from "./use-controls"
 
 CameraControls.install({ THREE })
 
-const style = {
-  color: "white",
-  fontSize: "1.2em",
-  left: 50,
-  position: "absolute",
-  top: 20,
-} as const
-
 const Carview = () => {
-  const controls = useControls()
+  const [isDarkModeOn, setIsDarkModeOn] = React.useState(true)
+
+  const controls = useControls(setIsDarkModeOn)
   const [showScene, setShowScene] = React.useState(true)
 
-  function CheckReset() {
+  function CheckButtonPresses() {
     useFrame(() => {
       const { reset } = controls.current
 
@@ -111,6 +105,30 @@ const Carview = () => {
 
   const AnimatedText = animated(Text)
 
+  // these are values for dark mode
+  const [ambientLightIntensity, setAmbientLightIntensity] = React.useState(0.3)
+  const [pointLightIntensity, setPointLightIntensity] = React.useState(0.5)
+  const [backgroundColor, setBackgroundColor] = React.useState("darkblue")
+  const [pointLightColor, setPointLightColor] = React.useState("gray")
+
+  const [instructionTextColor, setInstructionTextColor] = React.useState<string>("white")
+
+  useEffect(() => {
+    if (isDarkModeOn) {
+      setAmbientLightIntensity(0.3)
+      setPointLightIntensity(0.5)
+      setBackgroundColor("darkblue")
+      setPointLightColor("gray")
+      setInstructionTextColor("white")
+    } else {
+      setAmbientLightIntensity(0.5)
+      setPointLightIntensity(0.8)
+      setBackgroundColor("white")
+      setPointLightColor("white")
+      setInstructionTextColor("black")
+    }
+  }, [isDarkModeOn])
+
   return (
     <>
       {showScene && (
@@ -118,12 +136,16 @@ const Carview = () => {
           shadows
           camera={{ fov: 100, position: [0, 5, 10], near: 0.1, far: 2000 }}
         >
-          <CheckReset />
+          <CheckButtonPresses />
           <fog attach="fog" args={["blue", 10, 50]} />
-          <color attach="background" args={["darkblue"]} />
-          <ambientLight intensity={0.3} />
+          <color attach="background" args={[backgroundColor]} />
+          <ambientLight intensity={ambientLightIntensity} />
 
-          <pointLight intensity={0.5} color="gray" position={[0, 0, 0]} />
+          <pointLight
+            intensity={pointLightIntensity}
+            color={pointLightColor}
+            position={[0, 0, 0]}
+          />
 
           <Physics
             broadphase="SAP"
@@ -193,7 +215,7 @@ const Carview = () => {
                   position={[-1.5, 7.1, 0]}
                   rotation={[0.122173, 0.296706, 0.03490659]}
                 >
-                  Clique para focar nas fotos
+                  Click to focus
                 </AnimatedText>
               </group>
               {/* <VideoButton position={[-17, 4.3, 8]} rotation={[0, 0, 0]} /> */}
@@ -210,15 +232,26 @@ const Carview = () => {
           )}
         </Canvas>
       )}
-      <div style={style}>
+      <div
+        style={{
+          color: instructionTextColor,
+          fontSize: "1.2em",
+          left: 50,
+          position: "absolute",
+          top: 20,
+        }}
+      >
         <pre>
-          * WASD to drive, space to brake
+          * arrows to drive, space to brake
           <br />
+          <br />d to toogle dark mode
           <br />r to reset
           <br />? to debug
           <br />
           Shift to boost
           <br />c to change camera view
+          <br />
+          click on the photos to see cool zoom effect
         </pre>
       </div>
     </>
