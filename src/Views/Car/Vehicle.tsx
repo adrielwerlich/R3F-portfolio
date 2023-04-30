@@ -10,6 +10,7 @@ import type { Group, Mesh } from "three"
 import { Chassis } from "./Chassis"
 import { useControls } from "./use-controls"
 import { Wheel } from "./Wheel"
+import { genRandomBetween } from "./ElementsInCarView"
 
 export type VehicleProps = Required<
   Pick<BoxProps, "angularVelocity" | "position" | "rotation">
@@ -22,6 +23,10 @@ export type VehicleProps = Required<
   radius?: number
   steer?: number
   width?: number
+  elementControl: {
+    elementToControl: string
+    setElementToControl: React.Dispatch<React.SetStateAction<string>>
+  }
 }
 
 function Vehicle({
@@ -36,6 +41,7 @@ function Vehicle({
   rotation,
   steer = 0.5,
   width = 1.2,
+  elementControl,
 }: VehicleProps) {
   const wheels = [
     useRef<Group>(null),
@@ -43,6 +49,8 @@ function Vehicle({
     useRef<Group>(null),
     useRef<Group>(null),
   ]
+
+  const { elementToControl, setElementToControl } = elementControl
 
   const [smoothedCameraPosition] = React.useState(
     () => new THREE.Vector3(10, 10, 10)
@@ -112,26 +120,43 @@ function Vehicle({
   )
 
   useFrame((state) => {
-    const { backward, brake, forward, left, reset, right, cameraFollow, boost } =
-      controls.current
+    const {
+      backward,
+      brake,
+      forward,
+      left,
+      reset,
+      right,
+      cameraFollow,
+      boost,
+    } = controls.current
 
-    for (let e = 2; e < 4; e++) {
-      vehicleApi.applyEngineForce(
-        forward || backward ? force * (forward && !backward ? boost ? -4 : -2 : boost ? 10 : 6) : 0,
-        2
-      )
+    if (elementToControl === "car") {
+      for (let e = 2; e < 4; e++) {
+        vehicleApi.applyEngineForce(
+          forward || backward
+            ? force * (forward && !backward ? (boost ? -4 : -2) : boost ? 10 : 2)
+            : 0,
+          2
+        )
+      }
+  
+      for (let s = 0; s < 2; s++) {
+        vehicleApi.setSteeringValue(
+          left || right
+            ? steer * (left && !right ? (boost ? 2.2 : 1.6) : boost ? -2.2 : -1.6)
+            : 0,
+          s
+        )
+      }
+  
+      for (let b = 2; b < 4; b++) {
+        vehicleApi.setBrake(brake ? maxBrake : 0, b)
+      }
+    } else {
+      vehicleApi.setBrake(maxBrake, 2)
     }
 
-    for (let s = 0; s < 2; s++) {
-      vehicleApi.setSteeringValue(
-        left || right ? steer * (left && !right ? boost ? 2.2 : 1.6 : boost ? -2.2 : -1.6) : 0,
-        s
-      )
-    }
-
-    for (let b = 2; b < 4; b++) {
-      vehicleApi.setBrake(brake ? maxBrake : 0, b)
-    }
 
     if (reset) {
       chassisApi.position.set(...position)
@@ -166,7 +191,17 @@ function Vehicle({
   }, [])
 
   return (
-    <group ref={vehicle} position={[0, -0.4, 0]}>
+    <group
+      ref={vehicle}
+      position={[0, -0.4, 0]}
+      onClick={() => {
+        setElementToControl("car")
+        chassisApi.applyImpulse(
+          [0, 500, genRandomBetween(-.1, .1)],
+          [0, 500, 0]
+        )
+      }}
+    >
       <Chassis ref={chassisBody} />
       <Wheel ref={wheels[0]} radius={radius} leftSide />
       <Wheel ref={wheels[1]} radius={radius} />

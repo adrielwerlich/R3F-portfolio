@@ -1,6 +1,7 @@
 import React, { RefObject, Suspense, useEffect, useRef } from "react"
 // @ts-ignore
 import { useSpring, a } from "@react-spring/three"
+import { useControls } from "./use-controls"
 
 import {
   useCompoundBody,
@@ -8,6 +9,7 @@ import {
   useCylinder,
   usePlane,
   usePointToPointConstraint,
+  useSphere,
 } from "@react-three/cannon"
 
 import {
@@ -162,7 +164,7 @@ export const ImageButton = ({
 
   const [hovered, setHover] = React.useState(false)
 
-  const [ref] = useCylinder(
+  const [ref, api] = useCylinder(
     () => ({
       args: [0.6, 0.6, 1, 15],
       mass: mass,
@@ -174,7 +176,7 @@ export const ImageButton = ({
 
   const bind = useDragConstraint(ref)
 
-  const { scale } = useSpring({
+  const spring = useSpring({
     scale: hovered
       ? [
           scaleProp * onHoverScale,
@@ -211,25 +213,38 @@ export const ImageButton = ({
 
   return (
     // @ts-ignore
-    <a.group scale={scale} ref={ref} {...bind} dispose={null}>
+    <a.group scale={spring.scale} ref={ref} {...bind} dispose={null}>
       <a.mesh
         name={name}
         ref={meshRef}
         onPointerOver={() => {
           if (!zoomed) {
             setHover(true)
-            if (setIsHovered) {setIsHovered(true)}
+            if (setIsHovered) {
+              setIsHovered(true)
+            }
           }
           document.body.style.cursor = "pointer"
         }}
         onPointerOut={() => (
-          setHover(false), (document.body.style.cursor = ""), setIsHovered && setIsHovered(false)
+          setHover(false),
+          (document.body.style.cursor = ""),
+          setIsHovered && setIsHovered(false)
         )}
         // @ts-ignore
-        scale={scale}
+        scale={spring.scale}
         onClick={(event) => {
           if (zoomToView && ref?.current) {
             zoomToView(ref.current.position)
+          } else {
+            api.applyImpulse(
+              [
+                genRandomBetween(-1, 1),
+                genRandomBetween(-1, 4),
+                genRandomBetween(-1, 3),
+              ],
+              [0, genRandomBetween(-3, 2), genRandomBetween(-4, 4)]
+            )
           }
         }}
       >
@@ -355,31 +370,91 @@ export function Chair() {
   )
 }
 
-export function DummyBoy({ position, scale }) {
+export function genRandomBetween(min, max) {
+  return Math.random() * (max - min) + min
+}
+
+export function DummyBoy({ position, scale, elementControl }) {
+  const { elementToControl, setElementToControl } = elementControl
   const dummy = useGLTF("/assets/characterAdrielFace.glb")
-  const [ref] = useCylinder(
+  // console.log(dummy)
+  const [ref, api] = useBox(
     () => ({
-      args: [0.6, 0.6, 1, 16],
+      // args: [0, 0, 0],
       mass: 1,
       position: position,
       rotation: [0, 0, 0],
+      type: "Dynamic",
     }),
     useRef<Group>(null)
   )
   const bind = useDragConstraint(ref)
 
+  const [animationsIndex, setAnimationsIndex] = React.useState(0)
+  // 0: AnimationClip {name: 'Idle }
+  // 1: AnimationClip {name: 'Idle_swordLeft' }
+  // 2: AnimationClip {name: 'Roll_sword' }
+  // 3: AnimationClip {name: 'Run' }
+  // 4: AnimationClip {name: 'Run_swordAttack' }
+  // 5: AnimationClip {name: 'Run_swordRight' }
+
   let mixer
   if (dummy.animations.length) {
     mixer = new THREE.AnimationMixer(dummy.scene)
-    // dummy.animations.forEach(clip => {
-    const idleClipAnimation = dummy.animations[0]
+    const idleClipAnimation = dummy.animations[animationsIndex]
     const action = mixer.clipAction(idleClipAnimation)
     action.play()
-    // });
   }
+
+  const controls = useControls()
+
+  // const velocity = React.useRef([0, 0, 0])
+
+  // React.useEffect(() => {
+  //   api.velocity.subscribe((v) => {
+  //     velocity.current = v
+  //     console.log(velocity.current, "v")
+  //   })
+  // }, [api.velocity])
 
   useFrame((state, delta) => {
     mixer?.update(delta)
+
+    if (elementToControl === "boy") {
+      const {
+        backward,
+        brake,
+        forward,
+        left,
+        reset,
+        right,
+        cameraFollow,
+        boost,
+      } = controls.current
+
+      if (forward || backward || left || right) {
+        setAnimationsIndex(3)
+        api.applyImpulse([0, 0.0001, 0], [0, 0.0001, 0])
+        if (forward) {
+          api.velocity.set(0, 0, -5)
+          api.rotation.set(0, 3, 0)
+        } else if (backward) {
+          api.velocity.set(0, 0, 5)
+          api.rotation.set(0, 0, 0)
+        }
+
+        if (left) {
+          api.velocity.set(-5, 0, 0)
+          api.rotation.set(0, -1.55, 0)
+        } else if (right) {
+          api.velocity.set(5, 0, 0)
+          api.rotation.set(0, 1.5, 0)
+        }
+      } else {
+        setAnimationsIndex(0)
+        api.velocity.set(0, -5, 0)
+      }
+    }
   })
 
   return (
@@ -387,9 +462,16 @@ export function DummyBoy({ position, scale }) {
       ref={ref}
       {...bind}
       dispose={null}
-      onPointerDown={(e) => console.log("dummy boy", ref.current)}
+      // onPointerDown={(e) => console.log("dummy boy", ref.current)}
+      onClick={() => {
+        api.applyImpulse(
+          [0, 15, genRandomBetween(-.01, .01)],
+          [0, 15, 0]
+        )
+        setElementToControl("boy")
+      }}
     >
-      <primitive object={dummy.scene} position={[0, -0.49, 0]} scale={scale} />
+      <primitive object={dummy.scene} position={[0, -.45, 0]} scale={scale} />
     </group>
   )
 }
@@ -412,24 +494,21 @@ export function Plane(props: PlaneProps) {
 
 export function Pillar(props: CylinderProps) {
   const args: CylinderArgs = [0.7, 0.7, 5, 16]
-  const [rotation, setRotation] = React.useState(0)
-  const [ref] = useCylinder(
+  // const [rotation, setRotation] = React.useState(0)
+  const [ref, api] = useCylinder(
     () => ({
       args,
       mass: 10,
-      rotation: [0, rotation, 0],
+      rotation: [0, 0, 0],
       ...props,
     }),
     useRef<Mesh>(null)
   )
   const texture = useLoader(THREE.TextureLoader, "/img/R3F.png")
 
+  const y = genRandomBetween(-4, 4)
   useFrame(() => {
-    // setRotation(rotation + 0.01)
-    // if (ref?.current) {
-    // ref.current.rotateY(0.1)
-    // console.log(ref.current.rotation.y)
-    // }
+    api.angularVelocity.set(0, y, 0)
   })
   return (
     <mesh ref={ref} castShadow>

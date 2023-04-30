@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react"
 function useKeyControls(
   { current }: MutableRefObject<Record<GameControl, boolean>>,
   map: Record<KeyCode, GameControl>,
-  setIsDarkModeOn: (isDarkModeOn: boolean) => void
+  setIsDarkModeOn?: (isDarkModeOn: boolean) => void
 ) {
   useEffect(() => {
     const handleKeydown = ({ key }: KeyboardEvent) => {
@@ -60,7 +60,7 @@ type GameControl = typeof keyControlMap[KeyCode]
 const keyCodes = Object.keys(keyControlMap) as KeyCode[]
 const isKeyCode = (v: unknown): v is KeyCode => keyCodes.includes(v as KeyCode)
 
-export function useControls(setIsDarkModeOn) {
+export function useControls(setIsDarkModeOn?: React.Dispatch<React.SetStateAction<boolean>>) {
   const controls = useRef<Record<GameControl, boolean>>({
     backward: false,
     brake: false,

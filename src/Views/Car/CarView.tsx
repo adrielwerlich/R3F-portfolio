@@ -42,6 +42,8 @@ const Carview = () => {
   const controls = useControls(setIsDarkModeOn)
   const [showScene, setShowScene] = React.useState(true)
 
+  const [elementToControl, setElementToControl] = React.useState("boy")
+
   function CheckButtonPresses() {
     useFrame(() => {
       const { reset } = controls.current
@@ -82,7 +84,6 @@ const Carview = () => {
       () => new CameraControls(camera, gl.domElement),
       []
     )
-    console.log(camera.position, "initial position")
     return useFrame((state, delta) => {
       zoom ? pos.set(focus.x, focus.y, focus.z + 3.8) : pos.set(0, 5, 10)
       zoom ? look.set(focus.x, focus.y, focus.z - 3.8) : look.set(0, 5, 4)
@@ -111,8 +112,10 @@ const Carview = () => {
   const [backgroundColor, setBackgroundColor] = React.useState("darkblue")
   const [pointLightColor, setPointLightColor] = React.useState("gray")
 
-  const [instructionTextColor, setInstructionTextColor] = React.useState<string>("white")
+  const [instructionTextColor, setInstructionTextColor] =
+    React.useState<string>("white")
 
+    
   useEffect(() => {
     if (isDarkModeOn) {
       setAmbientLightIntensity(0.3)
@@ -123,9 +126,9 @@ const Carview = () => {
     } else {
       setAmbientLightIntensity(0.5)
       setPointLightIntensity(0.8)
-      setBackgroundColor("white")
+      setBackgroundColor("blue")
       setPointLightColor("white")
-      setInstructionTextColor("black")
+      setInstructionTextColor("yellow")
     }
   }, [isDarkModeOn])
 
@@ -164,6 +167,10 @@ const Carview = () => {
                 position={[0, 2, 0]}
                 rotation={[0, -Math.PI / 4, 0]}
                 angularVelocity={[0, 0.7, 0]}
+                elementControl={{
+                  elementToControl,
+                  setElementToControl,
+                }}
               />
               <Pillar position={[-5, 2.5, -5]} userData={{ id: "pillar-1" }} />
               <Pillar position={[0, 2.5, -5]} userData={{ id: "pillar-2" }} />
@@ -171,8 +178,15 @@ const Carview = () => {
 
               <Chair />
               <Table />
-              <DummyBoy position={[3, 3, 4]} scale={0.5} />
-              {/* <SelectToZoom> */}
+              <DummyBoy
+                position={[3, 0, 4]}
+                scale={0.5}
+                elementControl={{
+                  elementToControl,
+                  setElementToControl,
+                }}
+              />
+
               <ImageButton
                 position={[-11, 0.3, 0]}
                 rotation={[-1.5, 0, 0]}
@@ -250,6 +264,8 @@ const Carview = () => {
           <br />
           Shift to boost
           <br />c to change camera view
+          <br />
+          click on the car or on the boy to control them
           <br />
           click on the photos to see cool zoom effect
         </pre>

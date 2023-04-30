@@ -195,8 +195,6 @@ function Button(props) {
     config: { mass: 1.5, tension: 300 },
   })
 
-  console.log(spring.textSize , '111')
-
   const AnimatedPlanIcon = animated(PlanIcon)
   const AnimatedDesignIcon = animated(DesignIcon)
   const AnimatedBuildIcon = animated(BuildIcon)
