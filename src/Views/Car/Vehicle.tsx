@@ -1,5 +1,5 @@
 import React from "react"
-import * as THREE from "three"
+// import * as THREE from "three"
 
 import type { BoxProps, WheelInfoOptions } from "@react-three/cannon"
 import { useBox, useRaycastVehicle } from "@react-three/cannon"
@@ -11,6 +11,7 @@ import { Chassis } from "./Chassis"
 import { useControls } from "./use-controls"
 import { Wheel } from "./Wheel"
 import { genRandomBetween } from "./ElementsInCarView"
+import { cameraShouldFollow } from "./Camera"
 
 export type VehicleProps = Required<
   Pick<BoxProps, "angularVelocity" | "position" | "rotation">
@@ -52,10 +53,6 @@ function Vehicle({
 
   const { elementToControl, setElementToControl } = elementControl
 
-  const [smoothedCameraPosition] = React.useState(
-    () => new THREE.Vector3(10, 10, 10)
-  )
-  const [smoothedCameraTarget] = React.useState(() => new THREE.Vector3())
 
   const controls = useControls()
 
@@ -135,52 +132,55 @@ function Vehicle({
       for (let e = 2; e < 4; e++) {
         vehicleApi.applyEngineForce(
           forward || backward
-            ? force * (forward && !backward ? (boost ? -4 : -2) : boost ? 10 : 2)
+            ? force *
+                (forward && !backward ? (boost ? -4 : -2) : boost ? 10 : 2)
             : 0,
           2
         )
       }
-  
+
       for (let s = 0; s < 2; s++) {
         vehicleApi.setSteeringValue(
           left || right
-            ? steer * (left && !right ? (boost ? 2.2 : 1.6) : boost ? -2.2 : -1.6)
+            ? steer *
+                (left && !right ? (boost ? 2.2 : 1.6) : boost ? -2.2 : -1.6)
             : 0,
           s
         )
       }
-  
+
       for (let b = 2; b < 4; b++) {
         vehicleApi.setBrake(brake ? maxBrake : 0, b)
       }
+
+      if (reset) {
+        chassisApi.position.set(...position)
+        chassisApi.velocity.set(0, 0, 0)
+        chassisApi.angularVelocity.set(...angularVelocity)
+        chassisApi.rotation.set(...rotation)
+      }
+
+      if (cameraFollow) {
+        cameraShouldFollow(chassiPosition, state)
+
+        // const pos = new THREE.Vector3(...chassiPosition)
+        // const cameraPosition = new THREE.Vector3()
+        // cameraPosition.copy(pos as THREE.Vector3)
+        // cameraPosition.z += 7.25
+        // cameraPosition.y += 2.65
+
+        // const cameraTarget = new THREE.Vector3()
+        // cameraTarget.copy(pos as THREE.Vector3)
+        // cameraTarget.y += 0.25
+
+        // smoothedCameraPosition.lerp(cameraPosition, 1)
+        // smoothedCameraTarget.lerp(cameraTarget, 1)
+
+        // state.camera.position.copy(smoothedCameraPosition)
+        // state.camera.lookAt(smoothedCameraTarget)
+      }
     } else {
       vehicleApi.setBrake(maxBrake, 2)
-    }
-
-
-    if (reset) {
-      chassisApi.position.set(...position)
-      chassisApi.velocity.set(0, 0, 0)
-      chassisApi.angularVelocity.set(...angularVelocity)
-      chassisApi.rotation.set(...rotation)
-    }
-
-    if (cameraFollow) {
-      const pos = new THREE.Vector3(...chassiPosition)
-      const cameraPosition = new THREE.Vector3()
-      cameraPosition.copy(pos as THREE.Vector3)
-      cameraPosition.z += 7.25
-      cameraPosition.y += 2.65
-
-      const cameraTarget = new THREE.Vector3()
-      cameraTarget.copy(pos as THREE.Vector3)
-      cameraTarget.y += 0.25
-
-      smoothedCameraPosition.lerp(cameraPosition, 1)
-      smoothedCameraTarget.lerp(cameraTarget, 1)
-
-      state.camera.position.copy(smoothedCameraPosition)
-      state.camera.lookAt(smoothedCameraTarget)
     }
   })
 
@@ -197,7 +197,7 @@ function Vehicle({
       onClick={() => {
         setElementToControl("car")
         chassisApi.applyImpulse(
-          [0, 500, genRandomBetween(-.1, .1)],
+          [0, 500, genRandomBetween(-0.1, 0.1)],
           [0, 500, 0]
         )
       }}

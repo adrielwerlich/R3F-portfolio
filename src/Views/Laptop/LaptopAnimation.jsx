@@ -104,261 +104,272 @@ function LaptopAnimation(props) {
     )
   }
 
+  // const [timeout, settimeout] = useState(false)
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     settimeout(true)
+  //   }, 1000)
+  // }, [])
+
   return (
     <>
-      <Environment preset="city" />
+      {/* {false} */}
+      {/* {timeout && ( */}
+        <>
+          <Environment preset="city" />
 
-      <color args={["#0f59e2"]} attach="background" />
-      <group position={[-0.3, -0.3, 0.6]} scale={0.6}>
-        {/* <Link to="/car"> */}
+          <color args={["#0f59e2"]} attach="background" />
+          <group position={[-0.3, -0.3, 0.6]} scale={0.6}>
 
-        <PresentationControls
-          global
-          rotation={[0.1, -0.5, 0.05]}
-          polar={[-0.4, 0.2]}
-          azimuth={[-1, 0.75]}
-          config={{ mass: 2, tension: 400 }}
-          snap={{ mass: 4, tension: 400 }}
-        >
-          <Float rotationIntensity={0.4}>
-            <BuildExperience />
-            <OptimizeExperience />
-            <Buttons />
-            <group
-              {...customPointerEvents}
-              onClick={handleClick}
-              ref={group}
-              position={[0, -1.2, 0]}
-              rotation={[0.122173, 0.296706, 0.03490659]}
-              dispose={null}
+            <PresentationControls
+              global
+              rotation={[0.1, -0.5, 0.05]}
+              polar={[-0.4, 0.2]}
+              azimuth={[-1, 0.75]}
+              config={{ mass: 2, tension: 400 }}
+              snap={{ mass: 4, tension: 400 }}
             >
-              <group position={[0, 0.52, 0]} scale={[0.1, 0.1, 0.1]}>
-                <mesh
-                  geometry={nodes.Circle001.geometry}
-                  material={nodes.Circle001.material}
-                />
-
-                <mesh
-                  geometry={nodes.Circle001_1.geometry}
-                  material={nodes.Circle001_1.material}
-                />
-
-                <mesh
-                  geometry={nodes.Circle001_2.geometry}
-                  material={materials.HeadPhoneHole}
-                />
-
-                <mesh
-                  geometry={nodes.Circle001_3.geometry}
-                  material={nodes.Circle001_3.material}
-                />
-
-                <mesh
-                  geometry={nodes.Circle001_4.geometry}
-                  material={nodes.Circle001_4.material}
-                />
-
-                <mesh
-                  geometry={nodes.Circle001_5.geometry}
-                  material={materials.TouchbarBorder}
-                />
-
-                <mesh
-                  geometry={nodes.Circle001_6.geometry}
-                  material={materials.Keyboard}
-                />
-                <mesh
-                  geometry={nodes.KeyboardKeyHole.geometry}
-                  material={nodes.KeyboardKeyHole.material}
-                  position={[-11.79, -0.15, -8.3]}
-                  scale={5.8}
-                />
-                <mesh
-                  geometry={nodes.RubberFoot.geometry}
-                  material={materials.DarkRubber}
-                  position={[-11.95, -0.75, 7.86]}
-                  scale={5.8}
-                />
-                <group position={[0.01, -0.21, -10.56]} scale={5.8}>
-                  <mesh
-                    geometry={nodes.Circle012.geometry}
-                    material={materials.HingeBlack}
-                  />
-                  <mesh
-                    geometry={nodes.Circle012_1.geometry}
-                    material={materials.HingeMetal}
-                  />
-                </group>
-                <group position={[0, -0.51, 0]} scale={5.8}>
-                  <mesh
-                    geometry={nodes.Circle006.geometry}
-                    material={nodes.Circle006.material}
-                  />
-                  <mesh
-                    geometry={nodes.Circle006_1.geometry}
-                    material={nodes.Circle006_1.material}
-                  />
-                </group>
-                <group position={[-11.79, -0.15, -8.3]} scale={5.8}>
-                  <mesh
-                    geometry={nodes.Circle.geometry}
-                    material={nodes.Circle.material}
-                  />
-                  <mesh
-                    geometry={nodes.Circle_1.geometry}
-                    material={materials.Key}
-                  />
-                  <mesh
-                    geometry={nodes.Circle_2.geometry}
-                    material={materials.Touchbar}
-                  />
-                </group>
-
-                <animated.group
-                  position={[0.01, -0.47, -10.41]}
-                  rotation={spring.rotation}
-                  scale={5.8}
+              <Float rotationIntensity={0.4}>
+                <BuildExperience />
+                <OptimizeExperience />
+                <Buttons />
+                <group
+                  {...customPointerEvents}
+                  onClick={handleClick}
+                  ref={group}
+                  position={[0, -1.2, 0]}
+                  rotation={[0.122173, 0.296706, 0.03490659]}
+                  dispose={null}
                 >
-                  <mesh
-                    geometry={nodes.FrontCameraRing001.geometry}
-                    material={materials["CameraRIngBlack.002"]}
-                    position={[-0.15, 19.57, -16.15]}
-                    scale={5.8}
-                  />
-                  <rectAreaLight
-                    ref={laptopLight}
-                    width={2.5}
-                    height={1.65}
-                    intensity={15}
-                    color={"#7dc9ed"}
-                    rotation={[-1.3, Math.PI, 0]}
-                  />
-                  <EmptyLaptopScreen
-                    color={
-                      isClosed
-                        ? "black"
-                        : stageLevel === 3
-                        ? "#3c3a3a"
-                        : "white"
-                    }
-                  />
-                  <Html
-                    scale={!isClosed && stageLevel === 1 ? 1 : 0}
-                    transform
-                    wrapperClass="htmlScreen"
-                    distanceFactor={1.93}
-                    position={[-0.03, 0, -1.84]}
-                    rotation-x={-1.59}
-                  >
-                    <iframe src="https://adriel-portf.web.app" />
-                  </Html>
+                  <group position={[0, 0.52, 0]} scale={[0.1, 0.1, 0.1]}>
+                    <mesh
+                      geometry={nodes.Circle001.geometry}
+                      material={nodes.Circle001.material}
+                    />
 
-                  <DesignLaptopScreen />
-                  <BuildLaptopScreen />
-                  <OptimizeLaptopScreen />
+                    <mesh
+                      geometry={nodes.Circle001_1.geometry}
+                      material={nodes.Circle001_1.material}
+                    />
 
-                  <group position={[-8.3, -0.3, 6.6]} scale={0.9}>
-                    <Physics gravity={[0, -4, 0]}>
-                      <ThreeObject position={[1, 0, -1.5]} />
-                      <RigidBody
-                        position={[0, -1, 0]}
-                        type="fixed"
-                        colliders="false"
+                    <mesh
+                      geometry={nodes.Circle001_2.geometry}
+                      material={materials.HeadPhoneHole}
+                    />
+
+                    <mesh
+                      geometry={nodes.Circle001_3.geometry}
+                      material={nodes.Circle001_3.material}
+                    />
+
+                    <mesh
+                      geometry={nodes.Circle001_4.geometry}
+                      material={nodes.Circle001_4.material}
+                    />
+
+                    <mesh
+                      geometry={nodes.Circle001_5.geometry}
+                      material={materials.TouchbarBorder}
+                    />
+
+                    <mesh
+                      geometry={nodes.Circle001_6.geometry}
+                      material={materials.Keyboard}
+                    />
+                    <mesh
+                      geometry={nodes.KeyboardKeyHole.geometry}
+                      material={nodes.KeyboardKeyHole.material}
+                      position={[-11.79, -0.15, -8.3]}
+                      scale={5.8}
+                    />
+                    <mesh
+                      geometry={nodes.RubberFoot.geometry}
+                      material={materials.DarkRubber}
+                      position={[-11.95, -0.75, 7.86]}
+                      scale={5.8}
+                    />
+                    <group position={[0.01, -0.21, -10.56]} scale={5.8}>
+                      <mesh
+                        geometry={nodes.Circle012.geometry}
+                        material={materials.HingeBlack}
+                      />
+                      <mesh
+                        geometry={nodes.Circle012_1.geometry}
+                        material={materials.HingeMetal}
+                      />
+                    </group>
+                    <group position={[0, -0.51, 0]} scale={5.8}>
+                      <mesh
+                        geometry={nodes.Circle006.geometry}
+                        material={nodes.Circle006.material}
+                      />
+                      <mesh
+                        geometry={nodes.Circle006_1.geometry}
+                        material={nodes.Circle006_1.material}
+                      />
+                    </group>
+                    <group position={[-11.79, -0.15, -8.3]} scale={5.8}>
+                      <mesh
+                        geometry={nodes.Circle.geometry}
+                        material={nodes.Circle.material}
+                      />
+                      <mesh
+                        geometry={nodes.Circle_1.geometry}
+                        material={materials.Key}
+                      />
+                      <mesh
+                        geometry={nodes.Circle_2.geometry}
+                        material={materials.Touchbar}
+                      />
+                    </group>
+
+                    <animated.group
+                      position={[0.01, -0.47, -10.41]}
+                      rotation={spring.rotation}
+                      scale={5.8}
+                    >
+                      <mesh
+                        geometry={nodes.FrontCameraRing001.geometry}
+                        material={materials["CameraRIngBlack.002"]}
+                        position={[-0.15, 19.57, -16.15]}
+                        scale={5.8}
+                      />
+                      <rectAreaLight
+                        ref={laptopLight}
+                        width={2.5}
+                        height={1.65}
+                        intensity={15}
+                        color={"#7dc9ed"}
+                        rotation={[-1.3, Math.PI, 0]}
+                      />
+                      <EmptyLaptopScreen
+                        color={
+                          isClosed
+                            ? "black"
+                            : stageLevel === 3
+                            ? "#3c3a3a"
+                            : "white"
+                        }
+                      />
+                      <Html
+                        scale={!isClosed && stageLevel === 1 ? 1 : 0}
+                        transform
+                        wrapperClass="htmlScreen"
+                        distanceFactor={1.93}
+                        position={[-0.03, 0, -1.84]}
+                        rotation-x={-1.59}
                       >
-                        <CuboidCollider
-                          restitution={0.1}
-                          args={[1000, 1, 1000]}
-                        />
-                      </RigidBody>
-                    </Physics>
+                        <iframe src="https://adriel-portf.web.app" />
+                      </Html>
+
+                      <DesignLaptopScreen />
+                      <BuildLaptopScreen />
+                      <OptimizeLaptopScreen />
+
+                      <group position={[-8.3, -0.3, 6.6]} scale={0.9}>
+                        <Physics gravity={[0, -4, 0]}>
+                          <ThreeObject position={[1, 0, -1.5]} />
+                          <RigidBody
+                            position={[0, -1, 0]}
+                            type="fixed"
+                            colliders="false"
+                          >
+                            <CuboidCollider
+                              restitution={0.1}
+                              args={[1000, 1, 1000]}
+                            />
+                          </RigidBody>
+                        </Physics>
+                      </group>
+
+                      <mesh
+                        geometry={nodes.Circle002.geometry}
+                        material={nodes.Circle002.material}
+                      />
+
+                      <mesh
+                        geometry={nodes.Circle002_1.geometry}
+                        material={materials.Screen}
+                      />
+
+                      <mesh
+                        geometry={nodes.Circle002_2.geometry}
+                        material={materials.ScreenGlass}
+                      />
+
+                      <mesh
+                        geometry={nodes.Circle002_3.geometry}
+                        material={materials.Rubber}
+                      />
+
+                      <mesh
+                        geometry={nodes.Circle002_4.geometry}
+                        material={materials.DisplayGlass}
+                      />
+                    </animated.group>
+
+                    <group position={[-15.03, 0.03, 0.6]} scale={5.8}>
+                      <mesh
+                        geometry={nodes.Circle009.geometry}
+                        material={nodes.Circle009.material}
+                      />
+
+                      <mesh
+                        geometry={nodes.Circle009_1.geometry}
+                        material={nodes.Circle009_1.material}
+                      />
+                    </group>
+                    <group position={[12.2, 0.03, 0.6]} scale={5.8}>
+                      <mesh
+                        geometry={nodes.Circle003.geometry}
+                        material={nodes.Circle003.material}
+                      />
+
+                      <mesh
+                        geometry={nodes.Circle003_1.geometry}
+                        material={nodes.Circle003_1.material}
+                      />
+                    </group>
                   </group>
-
-                  <mesh
-                    geometry={nodes.Circle002.geometry}
-                    material={nodes.Circle002.material}
-                  />
-
-                  <mesh
-                    geometry={nodes.Circle002_1.geometry}
-                    material={materials.Screen}
-                  />
-
-                  <mesh
-                    geometry={nodes.Circle002_2.geometry}
-                    material={materials.ScreenGlass}
-                  />
-
-                  <mesh
-                    geometry={nodes.Circle002_3.geometry}
-                    material={materials.Rubber}
-                  />
-
-                  <mesh
-                    geometry={nodes.Circle002_4.geometry}
-                    material={materials.DisplayGlass}
-                  />
-                </animated.group>
-
-                <group position={[-15.03, 0.03, 0.6]} scale={5.8}>
-                  <mesh
-                    geometry={nodes.Circle009.geometry}
-                    material={nodes.Circle009.material}
-                  />
-
-                  <mesh
-                    geometry={nodes.Circle009_1.geometry}
-                    material={nodes.Circle009_1.material}
-                  />
                 </group>
-                <group position={[12.2, 0.03, 0.6]} scale={5.8}>
-                  <mesh
-                    geometry={nodes.Circle003.geometry}
-                    material={nodes.Circle003.material}
-                  />
-
-                  <mesh
-                    geometry={nodes.Circle003_1.geometry}
-                    material={nodes.Circle003_1.material}
-                  />
-                </group>
-              </group>
-            </group>
-            <Text
-              font="./bangers-v20-latin-regular.woff"
-              fontSize={0.7}
-              position={[2, 0.75, 0.75]}
-              rotation-y={-1.25}
-              maxWidth={2}
-              textAlign="left"
-            >
-              Adriel Werlich
-            </Text>
-          </Float>
-        </PresentationControls>
-      </group>
-      {/* Reflection Plane */}
-      <mesh
-        scale={50}
-        rotation={[-Math.PI / 2, 0, 0]}
-        position={[0, -1.5, 0]}
-        {...props}
-      >
-        <planeGeometry />
-        <MeshReflectorMaterial
-          blur={[300, 100]}
-          resolution={2048}
-          mixBlur={1}
-          mixStrength={3}
-          roughness={1}
-          depthScale={1.2}
-          minDepthThreshold={0.09}
-          maxDepthThreshold={1.4}
-          color="#181c2a"
-          metalness={1}
-          mirror={0}
-        />
-      </mesh>
-      <ContactShadows position={-4} opacity={1.4} scale={20} blur={2} />
+                <Text
+                  font="./bangers-v20-latin-regular.woff"
+                  fontSize={0.7}
+                  position={[2, 0.75, 0.75]}
+                  rotation-y={-1.25}
+                  maxWidth={2}
+                  textAlign="left"
+                >
+                  Adriel Werlich
+                </Text>
+              </Float>
+            </PresentationControls>
+          </group>
+          <mesh
+            scale={50}
+            rotation={[-Math.PI / 2, 0, 0]}
+            position={[0, -1.5, 0]}
+            {...props}
+          >
+            <planeGeometry />
+            <MeshReflectorMaterial
+              blur={[300, 100]}
+              resolution={2048}
+              mixBlur={1}
+              mixStrength={3}
+              roughness={1}
+              depthScale={1.2}
+              minDepthThreshold={0.09}
+              maxDepthThreshold={1.4}
+              color="#181c2a"
+              metalness={1}
+              mirror={0}
+            />
+          </mesh>
+          <ContactShadows position={-4} opacity={1.4} scale={20} blur={2} />
+        </>
+      {/* )} */}
     </>
   )
 }

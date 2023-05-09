@@ -10,7 +10,7 @@ import { customPointerEvents } from "../../helpers/customPointerEvents"
 import { useLaptopContext } from "../../context/LaptopContext"
 import { useNavigate } from "react-router-dom"
 
-import "./fontStyle.css"
+import "./styles.css"
 
 const BUTTON_WIDTH = 1.5
 const BUTTON_MARGIN = 0.1

@@ -36,6 +36,7 @@ import type {
   CylinderProps,
   PlaneProps,
 } from "@react-three/cannon"
+import { cameraShouldFollow } from "./Camera"
 
 type BoxProps = Omit<MeshProps, "args"> &
   Pick<BoxBufferGeometryProps, "args"> &
@@ -408,14 +409,13 @@ export function DummyBoy({ position, scale, elementControl }) {
 
   const controls = useControls()
 
-  // const velocity = React.useRef([0, 0, 0])
+  const [refPosition, setPosition] = React.useState([0, 0, 0])
 
   // React.useEffect(() => {
-  //   api.velocity.subscribe((v) => {
-  //     velocity.current = v
-  //     console.log(velocity.current, "v")
-  //   })
-  // }, [api.velocity])
+  // api.position.subscribe((v) => {
+  //   setPosition(v)
+  // })
+  // }, [api.position])
 
   useFrame((state, delta) => {
     mixer?.update(delta)
@@ -454,6 +454,10 @@ export function DummyBoy({ position, scale, elementControl }) {
         setAnimationsIndex(0)
         api.velocity.set(0, -5, 0)
       }
+
+      if (cameraFollow && ref?.current) {
+        cameraShouldFollow(refPosition, state)
+      }
     }
   })
 
@@ -464,14 +468,11 @@ export function DummyBoy({ position, scale, elementControl }) {
       dispose={null}
       // onPointerDown={(e) => console.log("dummy boy", ref.current)}
       onClick={() => {
-        api.applyImpulse(
-          [0, 15, genRandomBetween(-.01, .01)],
-          [0, 15, 0]
-        )
+        api.applyImpulse([0, 15, genRandomBetween(-0.01, 0.01)], [0, 15, 0])
         setElementToControl("boy")
       }}
     >
-      <primitive object={dummy.scene} position={[0, -.45, 0]} scale={scale} />
+      <primitive object={dummy.scene} position={[0, -0.45, 0]} scale={scale} />
     </group>
   )
 }

@@ -4,7 +4,8 @@ import { useEffect, useRef } from "react"
 function useKeyControls(
   { current }: MutableRefObject<Record<GameControl, boolean>>,
   map: Record<KeyCode, GameControl>,
-  setIsDarkModeOn?: (isDarkModeOn: boolean) => void
+  setIsDarkModeOn?: (isDarkModeOn: boolean) => void,
+  setShowControls?: (showControls: boolean) => void
 ) {
   useEffect(() => {
     const handleKeydown = ({ key }: KeyboardEvent) => {
@@ -21,6 +22,10 @@ function useKeyControls(
             setIsDarkModeOn(true)
           }
         }
+      }
+      if (key === "s" && setShowControls) {
+        // @ts-ignore
+        setShowControls(value => !value)
       }
       if (key === "c" && current[map[key]]) {
         current[map[key]] = false
@@ -52,15 +57,19 @@ const keyControlMap = {
   d: "darkModeToggle",
   r: "reset",
   c: "cameraFollow",
+  s: "showControls",
 } as const
 
 type KeyCode = keyof typeof keyControlMap
-type GameControl = typeof keyControlMap[KeyCode]
+type GameControl = (typeof keyControlMap)[KeyCode]
 
 const keyCodes = Object.keys(keyControlMap) as KeyCode[]
 const isKeyCode = (v: unknown): v is KeyCode => keyCodes.includes(v as KeyCode)
 
-export function useControls(setIsDarkModeOn?: React.Dispatch<React.SetStateAction<boolean>>) {
+export function useControls(
+  setIsDarkModeOn?: React.Dispatch<React.SetStateAction<boolean>>,
+  setShowControls?: React.Dispatch<React.SetStateAction<boolean>>
+) {
   const controls = useRef<Record<GameControl, boolean>>({
     backward: false,
     brake: false,
@@ -71,9 +80,10 @@ export function useControls(setIsDarkModeOn?: React.Dispatch<React.SetStateActio
     cameraFollow: false,
     boost: false,
     darkModeToggle: false,
+    showControls: true,
   })
 
-  useKeyControls(controls, keyControlMap, setIsDarkModeOn)
+  useKeyControls(controls, keyControlMap, setIsDarkModeOn, setShowControls)
 
   return controls
 }
