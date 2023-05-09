@@ -9,7 +9,7 @@ import {
   BrowserRouter,
 } from "react-router-dom"
 
-import Carview from "./Views/Car/CarView"
+import CarEnvironmentLoader from "./Views/Car/CarEnvironmentLoader"
 
 import LaptopView from "./Views/Laptop/LaptopView"
 
@@ -18,7 +18,7 @@ export const AppRoutes = () => {
     <>
       <Routes>
         <Route path="" element={<LaptopView />} />
-        <Route path="/car" element={<Carview />} />
+        <Route path="/car" element={<CarEnvironmentLoader />} />
       </Routes>
     </>
   )

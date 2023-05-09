@@ -141,7 +141,6 @@ const Carview = () => {
           shadows
           camera={{ fov: 100, position: [0, 5, 10], near: 0.1, far: 2000 }}
         >
-          <Suspense fallback={<Fallback />}>
             <CheckButtonPresses />
             <fog attach="fog" args={["blue", 10, 50]} />
             <color attach="background" args={[backgroundColor]} />
@@ -248,7 +247,7 @@ const Carview = () => {
             ) : (
               <CustomControls zoom={zoom} focus={focus} />
             )}
-          </Suspense>
+
         </Canvas>
       )}
       {showControls && (

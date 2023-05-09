@@ -4,33 +4,52 @@ import { Html } from "@react-three/drei"
 
 import "../assets/spinnerStyles.css"
 
-const Fallback = () => {
-    console.log("fallback loading")
-  
-    return (
-      <>
-        <Html position={[-0.03, 0, -1.84]}>
-          <div
-            style={{
-              padding: "10px",
-              fontWeight: "900",
-              fontSize: "3em",
-              color: "white",
-              width: "200px",
-              height: "200px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "20px",
-            }}
-          >
-            Loading...
-            <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-            {/* <span style={{ color: "blue" }}>text</span> */}
-          </div>
-        </Html>
-      </>
-    )
-  }
+const Fallback = ({ renderHtml = true }: { renderHtml: boolean }) => {
+  console.log("fallback loading")
 
-  export default Fallback;
+  const innerContent = (
+    <div
+      style={{
+        padding: "10px",
+        fontWeight: "900",
+        fontSize: "3em",
+        color: "white",
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "20px",
+        justifyContent: 'center',
+      }}
+    >
+      Loading...
+      <div className="lds-spinner">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  )
+
+  return (
+    <>
+      {renderHtml ? (
+        <Html position={[-0.03, 0, -1.84]}>{innerContent}</Html>
+      ) : (
+        innerContent
+      )}
+    </>
+  )
+}
+
+export default Fallback
