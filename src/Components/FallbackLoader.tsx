@@ -44,7 +44,7 @@ const Fallback = ({ renderHtml = true }: { renderHtml: boolean }) => {
   return (
     <>
       {renderHtml ? (
-        <Html position={[-0.03, 0, -1.84]}>{innerContent}</Html>
+        <Html>{innerContent}</Html>
       ) : (
         innerContent
       )}

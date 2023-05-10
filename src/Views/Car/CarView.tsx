@@ -22,7 +22,7 @@ import { Debug, Physics } from "@react-three/cannon"
 
 import { animated } from "@react-spring/three"
 
-import { Environment, OrbitControls, Text } from "@react-three/drei"
+import { Environment, Html, OrbitControls, Text } from "@react-three/drei"
 
 import { Suspense, useEffect } from "react"
 import React from "react"
@@ -141,141 +141,139 @@ const Carview = () => {
           shadows
           camera={{ fov: 100, position: [0, 5, 10], near: 0.1, far: 2000 }}
         >
-            <CheckButtonPresses />
-            <fog attach="fog" args={["blue", 10, 50]} />
-            <color attach="background" args={[backgroundColor]} />
-            <ambientLight intensity={ambientLightIntensity} />
+          <CheckButtonPresses />
+          <fog attach="fog" args={["blue", 10, 50]} />
+          <color attach="background" args={[backgroundColor]} />
+          <ambientLight intensity={ambientLightIntensity} />
 
-            <pointLight
-              intensity={pointLightIntensity}
-              color={pointLightColor}
-              position={[0, 0, 0]}
-            />
+          <pointLight
+            intensity={pointLightIntensity}
+            color={pointLightColor}
+            position={[0, 0, 0]}
+          />
 
-            <Physics
-              broadphase="SAP"
-              defaultContactMaterial={{
-                contactEquationRelaxation: 4,
-                friction: 1e-3,
-              }}
-              allowSleep
-            >
-              <ToggledDebug>
-                <Plane
-                  rotation={[-Math.PI / 2, 0, 0]}
-                  userData={{ id: "floor" }}
-                />
-                <Vehicle
-                  position={[0, 2, 0]}
-                  rotation={[0, -Math.PI / 4, 0]}
-                  angularVelocity={[0, 0.7, 0]}
-                  elementControl={{
-                    elementToControl,
-                    setElementToControl,
-                  }}
-                />
-                <Pillar
-                  position={[-5, 2.5, -5]}
-                  userData={{ id: "pillar-1" }}
-                />
-                <Pillar position={[0, 2.5, -5]} userData={{ id: "pillar-2" }} />
-                <Pillar position={[5, 2.5, -5]} userData={{ id: "pillar-3" }} />
+          <Physics
+            broadphase="SAP"
+            defaultContactMaterial={{
+              contactEquationRelaxation: 4,
+              friction: 1e-3,
+            }}
+            allowSleep
+          >
+            <ToggledDebug>
+              <Plane
+                rotation={[-Math.PI / 2, 0, 0]}
+                userData={{ id: "floor" }}
+              />
+              <Vehicle
+                position={[0, 2, 0]}
+                rotation={[0, -Math.PI / 4, 0]}
+                angularVelocity={[0, 0.7, 0]}
+                elementControl={{
+                  elementToControl,
+                  setElementToControl,
+                }}
+              />
+              <Pillar position={[-5, 2.5, -5]} userData={{ id: "pillar-1" }} />
+              <Pillar position={[0, 2.5, -5]} userData={{ id: "pillar-2" }} />
+              <Pillar position={[5, 2.5, -5]} userData={{ id: "pillar-3" }} />
 
-                <Chair />
-                <Table />
-                <DummyBoy
-                  position={[3, 0, 4]}
-                  scale={0.5}
-                  elementControl={{
-                    elementToControl,
-                    setElementToControl,
-                  }}
-                />
+              <Chair />
+              <Table />
+              <DummyBoy
+                position={[3, 0, 4]}
+                scale={0.5}
+                elementControl={{
+                  elementToControl,
+                  setElementToControl,
+                }}
+              />
 
+              <ImageButton
+                position={[-11, 0.3, 0]}
+                rotation={[-1.5, 0, 0]}
+                texture={reactTexture}
+                color={"#f0f"}
+              />
+              <group>
                 <ImageButton
-                  position={[-11, 0.3, 0]}
-                  rotation={[-1.5, 0, 0]}
-                  texture={reactTexture}
-                  color={"#f0f"}
+                  position={[-11, 6.9, -4]}
+                  rotation={[0, 0, 0]}
+                  mass={0}
+                  texture={[img1, img2, img3, img4]}
+                  color={""}
+                  scaleProp={2}
+                  onHoverScale={1.3}
+                  name={"photos"}
+                  setIsHovered={setLinkHovered}
+                  zoomToView={(focusRef) => (
+                    setZoom(!zoom),
+                    setFocus(focusRef),
+                    showOrbitControls
+                      ? setShowOrbitControls(false)
+                      : setTimeout(() => {
+                          setShowOrbitControls(!showOrbitControls)
+                        }, 1600)
+                  )}
+                  zoomed={zoom}
                 />
-                <group>
-                  <ImageButton
-                    position={[-11, 6.9, -4]}
-                    rotation={[0, 0, 0]}
-                    mass={0}
-                    texture={[img1, img2, img3, img4]}
-                    color={""}
-                    scaleProp={2}
-                    onHoverScale={1.3}
-                    name={"photos"}
-                    setIsHovered={setLinkHovered}
-                    zoomToView={(focusRef) => (
-                      setZoom(!zoom),
-                      setFocus(focusRef),
-                      showOrbitControls
-                        ? setShowOrbitControls(false)
-                        : setTimeout(() => {
-                            setShowOrbitControls(!showOrbitControls)
-                          }, 1600)
-                    )}
-                    zoomed={zoom}
-                  />
-                  {/* @ts-ignore */}
-                  <AnimatedText
-                    strokeOpacity={0}
-                    fillOpacity={linkHovered ? 1 : 0}
-                    font={"./fonts/woff/Averta-Standard-Black.woff"}
-                    color={"white"}
-                    fontSize={0.1}
-                    characters="PlanDesignBuOtmz"
-                    anchorX={"center"}
-                    anchorY={"middle"}
-                    scale={5}
-                    position={[-1.5, 7.1, 0]}
-                    rotation={[0.122173, 0.296706, 0.03490659]}
-                  >
-                    Click to focus
-                  </AnimatedText>
-                </group>
-                {/* <VideoButton position={[-17, 4.3, 8]} rotation={[0, 0, 0]} /> */}
-                {/* <VideoPlaylist position={[-17, 2.3, 2]} rotation={[-1.5, 0, 0]} /> */}
-              </ToggledDebug>
-            </Physics>
-            <Environment preset="night" />
-            {showOrbitControls ? (
-              <OrbitControls />
-            ) : (
-              <CustomControls zoom={zoom} focus={focus} />
-            )}
-
+                {/* @ts-ignore */}
+                <AnimatedText
+                  strokeOpacity={0}
+                  fillOpacity={linkHovered ? 1 : 0}
+                  font={"./fonts/woff/Averta-Standard-Black.woff"}
+                  color={"white"}
+                  fontSize={0.1}
+                  characters="PlanDesignBuOtmz"
+                  anchorX={"center"}
+                  anchorY={"middle"}
+                  scale={5}
+                  position={[-1.5, 7.1, 0]}
+                  rotation={[0.122173, 0.296706, 0.03490659]}
+                >
+                  Click to focus
+                </AnimatedText>
+              </group>
+              {/* <VideoButton position={[-17, 4.3, 8]} rotation={[0, 0, 0]} /> */}
+              {/* <VideoPlaylist position={[-17, 2.3, 2]} rotation={[-1.5, 0, 0]} /> */}
+            </ToggledDebug>
+          </Physics>
+          <Environment preset="night" />
+          {showOrbitControls ? (
+            <OrbitControls />
+          ) : (
+            <CustomControls zoom={zoom} focus={focus} />
+          )}
+          {showControls && (
+            <Html >
+              <div
+                style={{
+                  color: instructionTextColor,
+                  fontSize: "1.2em",
+                  right: "23vw",
+                  position: "absolute",
+                  top: "-49vh",
+                }}
+              >
+                <pre>
+                  * arrows to drive, space to brake
+                  <br />
+                  <br />s to toggle instructions
+                  <br />d to toogle dark mode
+                  <br />r to reset
+                  <br />? to debug
+                  <br />
+                  Shift to boost
+                  <br />c to change camera view
+                  <br />
+                  click on the car or on the boy to control them
+                  <br />
+                  click on the photos to see cool zoom effect
+                </pre>
+              </div>
+            </Html>
+          )}
         </Canvas>
-      )}
-      {showControls && (
-        <div
-          style={{
-            color: instructionTextColor,
-            fontSize: "1.2em",
-            left: 50,
-            position: "absolute",
-            top: 20,
-          }}
-        >
-          <pre>
-            * arrows to drive, space to brake
-            <br />
-            <br />s to toggle instructions
-            <br />d to toogle dark mode
-            <br />r to reset
-            <br />? to debug
-            <br />
-            Shift to boost
-            <br />c to change camera view
-            <br />
-            click on the car or on the boy to control them
-            <br />
-            click on the photos to see cool zoom effect
-          </pre>
-        </div>
       )}
     </>
   )
