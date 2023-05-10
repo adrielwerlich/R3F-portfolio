@@ -31,7 +31,7 @@ const LaptopView = () => {
       >
         <StageLevelProvider>
           <LaptopProvider>
-            <Suspense fallback={<Fallback />}>
+            <Suspense fallback={<Fallback renderHtml={true} />}>
               <LaptopAnimation />
             </Suspense>
           </LaptopProvider>

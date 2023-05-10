@@ -44,7 +44,10 @@ const Fallback = ({ renderHtml = true }: { renderHtml: boolean }) => {
   return (
     <>
       {renderHtml ? (
-        <Html>{innerContent}</Html>
+        <Html style={{
+          width: '100%',
+          height: '100%',
+        }} >{innerContent}</Html>
       ) : (
         innerContent
       )}
