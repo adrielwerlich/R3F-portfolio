@@ -91,4 +91,4 @@ export default function Model(props) {
   )
 }
 
-useGLTF.preload('/design-icon.glb')
+useGLTF.preload('/assets/design-icon.glb')

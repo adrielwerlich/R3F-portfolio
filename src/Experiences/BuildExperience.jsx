@@ -15,7 +15,7 @@ export default function BuildExperience(props) {
 
   return (
     <animated.group scale={spring.scale}>
-      <FloatingBalls />
+      {/* <FloatingBalls /> */}
     </animated.group>
   )
 }

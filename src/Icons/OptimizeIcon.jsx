@@ -50,4 +50,4 @@ export default function Icon(props) {
   )
 }
 
-useGLTF.preload("/optimize-icon3.gltf")
+useGLTF.preload("/assets/optimize-icon3.gltf")

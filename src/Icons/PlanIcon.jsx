@@ -61,4 +61,4 @@ export default function Model(props) {
   )
 }
 
-useGLTF.preload("/plan_icon1.glb")
+useGLTF.preload("/assets/plan_icon1.glb")
