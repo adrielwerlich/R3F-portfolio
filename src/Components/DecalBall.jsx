@@ -26,7 +26,7 @@ export default function Component(props) {
           rotation={props.decalRotation}
           scale={props.decalScale}
           map={decal}
-          map-anisotropy={16}
+          // map-anisotropy={16}
           flatShading
         ></Decal>
       </mesh>

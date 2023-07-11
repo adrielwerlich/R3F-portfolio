@@ -99,17 +99,17 @@ export default function FloatingBalls(props) {
         id="vue-ball"
       />
       {/* Vercel */}
-      <AnimatedDecalBall
+      {/* <AnimatedDecalBall
         scale={scale}
         imgPath={"./img/vercel.webp"}
         position={spring.vercelPosition}
         rotation={rotations.vercel}
-        geoArgs={[0.5, 1]}
+        geoArgs={[0.5, 5]}
         color={"#74808f"}
-        decalPosition={[0.04, -0.33, 0.39]}
+        decalPosition={[20.5, 5.1, 0.15]}
         decalScale={spring.decalScale}
-        decalRotation={-6.33}
-      />
+        decalRotation={.33}
+      /> */}
       {/* React */}
       <AnimatedDecalBall
         scale={scale}
